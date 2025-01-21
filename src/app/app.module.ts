@@ -9,12 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DashComponent } from './dash/dash.component';
+import { LibrosCargarComponent } from './libros/libros-cargar/libros-cargar.component';
+import { LibrosEditarComponent } from './libros/libros-editar/libros-editar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LibrosListarComponent,
-    DashComponent
+    DashComponent,
+    LibrosCargarComponent,
+    LibrosEditarComponent
   ],
   imports: [
     BrowserModule,

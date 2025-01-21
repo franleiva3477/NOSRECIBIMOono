@@ -25,4 +25,7 @@ export class LibrosService {
   obtenerlibros():Observable<Libro[]>{
     return this.clienteHttp.get<Libro[]>(this.api);
   }
+  agregarLibros(libro:Libro):Observable<any>{
+    return this.clienteHttp.post(this.api,libro);
+  }
 }
