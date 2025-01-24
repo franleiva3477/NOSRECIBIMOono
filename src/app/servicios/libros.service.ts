@@ -28,4 +28,13 @@ export class LibrosService {
   agregarLibros(libro:Libro):Observable<any>{
     return this.clienteHttp.post(this.api,libro);
   }
+  borrarlibro(idLibro: any): Observable<any> {
+    return this.clienteHttp.delete(`${this.api}?idLibro=${idLibro}`);
+  }
+  obtenerLibro(idLibro: any): Observable<any> {
+    return this.clienteHttp.get(`${this.api}?idLibro=${idLibro}`);
+  }
+  actualizarLibro(idLibro: string, datosLibro: any): Observable<any> {
+    return this.clienteHttp.put(`${this.api}?idLibro=${idLibro}`, datosLibro);
+  }
 }

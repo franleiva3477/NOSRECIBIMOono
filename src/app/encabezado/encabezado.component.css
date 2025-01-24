@@ -1,0 +1,17 @@
+.app-header {
+    display: flex;
+    align-items: center;
+    background-color: #007bff; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 1px;
+  }
+  
+  .logo img {
+    height: 30px; /* Ajusta el tamaño del logo */
+    margin-right: 10px; /* Espacio entre el logo y el título */
+  }
+  
+  .app-title {
+    margin: 0; /* Elimina el margen del título */
+  }
+  

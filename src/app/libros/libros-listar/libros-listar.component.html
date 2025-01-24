@@ -11,26 +11,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let libro of libros">
-        
-            <tr *ngFor="let libro of libros">
-
-                <td>{{libro.libTitulo}}</td>
-                <td>{{libro.libAnio}}</td>
-                <td>{{libro.autorID}}</td>
-                <td>{{libro.editorialID}}</td>
-
-                <td>
-                  <a
-                  class="btn btn-warning"
-                  routerLink="/libros-editar/{{ libro.idLibro }}"
-                  >editar<i class="fa-solid fa-pen"></i></a
-                >
-                </td>
-                
-            </tr> 
-        
-     
-    
+      <tr *ngFor="let libro of libros; let idControl = index">
+        <td>{{libro.libTitulo}}</td>
+        <td>{{libro.libAnio}}</td>
+        <td>{{libro.autorID}}</td>
+        <td>{{libro.editorialID}}</td>
+        <td>
+          <a
+            class="btn btn-warning"
+            routerLink="/libros-editar/{{ libro.idLibro }}"
+          >editar<i class="fa-solid fa-pen"></i></a>
+          <a
+            class="btn btn-danger"
+            (click)="borrarLibro(libro.idLibro, idControl)" 
+            role="button"
+          >eliminar</a>
+        </td>
+      </tr>
     </tbody>
+    
   </table>

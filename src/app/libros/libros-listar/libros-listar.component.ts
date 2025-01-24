@@ -28,6 +28,20 @@ export class LibrosListarComponent {
       
       });
     }
+    borrarLibro(idLibro: any, idControl: any) {
+      console.log(idLibro);
+      console.log(idControl);
+  
+      if (window.confirm('¿Desea borrar el registro?')) {
+        this.servicioLibros.borrarlibro(idLibro).subscribe((respuesta) => {
+          this.libros.splice(idControl, 1);
+          this.routeador.navigateByUrl('/biblioteca/libros-listado');
+          ; 
+  
+          window.location.href = window.location.href;
+        });
+      }
+    }
 
 
 }

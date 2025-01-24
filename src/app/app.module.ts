@@ -11,6 +11,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DashComponent } from './dash/dash.component';
 import { LibrosCargarComponent } from './libros/libros-cargar/libros-cargar.component';
 import { LibrosEditarComponent } from './libros/libros-editar/libros-editar.component';
+import { AutoresListarComponent } from './autores/autores-listar/autores-listar.component';
+import { AutoresCargarComponent } from './autores/autores-cargar/autores-cargar.component';
+import { AutoresEditarComponent } from './autores/autores-editar/autores-editar.component';
+import { EncabezadoComponent } from './encabezado/encabezado.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { LibrosEditarComponent } from './libros/libros-editar/libros-editar.comp
     LibrosListarComponent,
     DashComponent,
     LibrosCargarComponent,
-    LibrosEditarComponent
+    LibrosEditarComponent,
+    AutoresListarComponent,
+    AutoresCargarComponent,
+    AutoresEditarComponent,
+    EncabezadoComponent
   ],
   imports: [
     BrowserModule,
