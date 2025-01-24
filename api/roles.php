@@ -160,4 +160,4 @@ function handleDeleteRequest($pdo) {
     }
     exit;
 }
-?>
+?>                  
