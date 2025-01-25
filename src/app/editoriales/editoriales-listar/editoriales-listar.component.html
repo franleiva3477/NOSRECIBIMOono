@@ -1,0 +1,71 @@
+
+<div
+class="card-header justify-content-between align-items-center text-center bg-light p-2"
+>
+
+<div class="col-3 col-sm-2">
+  <a
+    class="btn btn-primary"
+    [routerLink]="['/biblioteca/editorial-agregar']"
+    role="button"
+  >
+  Cargar
+    <i class="fa-solid fa-plus"></i>
+  </a>
+</div>
+</div>
+
+<div class="card-body">
+<div class="table-responsive">
+  <table class="table caption-top table-striped">
+    <caption>
+      Listado de Editoriales
+    </caption>
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Email</th>
+       
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let editorial of editorialesFiltradas ;
+          let iControl = index
+        "
+      >
+        <td>{{ editorial.ediNombre }}</td>
+        <td>{{ editorial.ediDireccion }}</td>
+        <td>{{ editorial.ediTelefono }}</td>
+        <td>{{ editorial.ediEmail }}</td>
+        
+        <td>
+          <a
+            class="btn btn-warning m-1"
+            [routerLink]="[
+              '/editoriales-editar',
+              editorial.idEditorial
+            ]"
+          >
+           editar
+          </a>
+          <a
+            class="btn btn-danger"
+            role="button"
+            (click)="borrarEditorial(editorial.idEditorial, iControl)"
+          >
+            eliminar
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="p-2">
+  
+</div>
+</div>

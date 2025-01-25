@@ -15,6 +15,9 @@ import { AutoresListarComponent } from './autores/autores-listar/autores-listar.
 import { AutoresCargarComponent } from './autores/autores-cargar/autores-cargar.component';
 import { AutoresEditarComponent } from './autores/autores-editar/autores-editar.component';
 import { EncabezadoComponent } from './encabezado/encabezado.component';
+import { EditorialesListarComponent } from './editoriales/editoriales-listar/editoriales-listar.component';
+import { EditorialesEditarComponent } from './editoriales/editoriales-editar/editoriales-editar.component';
+import { EditorialesCargarComponent } from './editoriales/editoriales-cargar/editoriales-cargar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { EncabezadoComponent } from './encabezado/encabezado.component';
     AutoresListarComponent,
     AutoresCargarComponent,
     AutoresEditarComponent,
-    EncabezadoComponent
+    EncabezadoComponent,
+    EditorialesListarComponent,
+    EditorialesEditarComponent,
+    EditorialesCargarComponent
   ],
   imports: [
     BrowserModule,

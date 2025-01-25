@@ -7,6 +7,9 @@ import { LibrosEditarComponent } from './libros/libros-editar/libros-editar.comp
 import { AutoresEditarComponent } from './autores/autores-editar/autores-editar.component';
 import { AutoresListarComponent } from './autores/autores-listar/autores-listar.component';
 import { AutoresCargarComponent } from './autores/autores-cargar/autores-cargar.component';
+import { EditorialesListarComponent } from './editoriales/editoriales-listar/editoriales-listar.component';
+import { EditorialesCargarComponent } from './editoriales/editoriales-cargar/editoriales-cargar.component';
+import { EditorialesEditarComponent } from './editoriales/editoriales-editar/editoriales-editar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dash', pathMatch: 'full' },  // Ruta por defecto
@@ -17,8 +20,13 @@ const routes: Routes = [
 
   { path: 'autores-listar', component: AutoresListarComponent },
   { path: 'autores-cargar', component: AutoresCargarComponent},
-
   { path: 'autores-editar/:id', component: AutoresEditarComponent},
+
+  { path: 'editoriales-listar', component: EditorialesListarComponent },
+  { path: 'autores-cargar', component: EditorialesCargarComponent },
+  { path: 'editoriales-editar/:id', component: EditorialesEditarComponent},
+
+
 
 
 ];
