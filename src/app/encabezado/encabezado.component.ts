@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./encabezado.component.css']
 })
 export class EncabezadoComponent {
+  isMenuOpen = false;
+
+  constructor(){
+
+  }
+
+  ngOnInit() { }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 
 }

@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LibrosService, Libro } from 'src/app/servicios/libros.service';
-//import { EditorialesService } from 'src/app/biblioteca/services/editoriales.service';
-//import { MateriasService } from 'src/app/biblioteca/services/materias.service';
-//import { SigTopoService } from 'src/app/biblioteca/services/sig-topo.service';
-//import { AutoresService } from 'src/app/biblioteca/services/autores.service';
+import { EditorialesService } from 'src/app/servicios/editoriales.service';
+import { MateriasService } from 'src/app/servicios/materias.service';
+import { AutoresService } from 'src/app/servicios/autores.service';
 
 
 @Component({
@@ -17,24 +16,21 @@ export class LibrosCargarComponent implements OnInit{
 
   formularioDeLibros:FormGroup;
   editoriales: any = [];
-  listadosignaturas:any=[];
   listadoMaterias: any = [];
-  listadoautores: any =[];
+  listadoautores: any=[];
 
   
   constructor(public formulario:FormBuilder,
     private servicioLibros:LibrosService,
-  //  private editorialesService: EditorialesService,
-    //private materiasService: MateriasService,
-    //private servicioSignaturas: SigTopoService,
-    //private autoresService: AutoresService,
+   private editorialesService: EditorialesService,
+    private materiasService: MateriasService,
+    private autoresService: AutoresService,
     private routeador: Router
   ){
     
     this.formularioDeLibros=this.formulario.group({
       libTitulo: ['', [Validators.required, Validators.minLength(4)]],
       libAnio: ['', [Validators.required,Validators.minLength(4)]], 
-      SigTopograficaID: ['', [Validators.required]],
       EditorialID: ['', [Validators.required]],
       libCantidad: ['', [Validators.required]],
       autorID: ['', [Validators.required]],
@@ -43,7 +39,20 @@ export class LibrosCargarComponent implements OnInit{
     })
    }
   ngOnInit(): void {
+    this.editorialesService.ObtenerEditoriales().subscribe((respuesta) => {
+      console.log(respuesta);
+       this.editoriales= respuesta;
+     });
 
+     this.materiasService.ObtenerMaterias().subscribe((respuesta)=>{
+      console.log(respuesta);
+      this.listadoMaterias = respuesta;
+    });
+
+    this.autoresService.getAutor().subscribe((respuesta)=>{
+      console.log(respuesta);
+      this.listadoautores= respuesta;
+    });
     
  
   }
@@ -53,7 +62,7 @@ export class LibrosCargarComponent implements OnInit{
     this.servicioLibros.agregarLibros(this.formularioDeLibros.value).subscribe(
       (respuesta) => {
         console.log("Libro agregado:", respuesta);
-        this.routeador.navigateByUrl('/biblioteca/libros-listado');
+        this.routeador.navigateByUrl('/libros-listar');
       }
     );
   }

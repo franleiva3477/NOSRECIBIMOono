@@ -71,3 +71,32 @@ function handleGetRequest($pdo) {
     }
     exit;
 }
+
+function handlePostRequest($pdo) {
+    $data = json_decode(file_get_contents("php://input"));
+    
+    // Verifica si se proporcionan los campos necesarios
+    if (isset($data->libTitulo) && isset($data->libAnio)  && isset($data->EditorialID) 
+    && isset($data->autorID) && isset($data->MateriaID) && isset($data->libNotaContenido)) {
+        $sql = "INSERT INTO LIBROS (libTitulo, libAnio, ,EditorialID,  autorID, MateriaID, libNotaContenido) 
+                VALUES (:libTitulo, :libAnio,  :EditorialID,:autorID, :MateriaID, :libNotaContenido)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':libTitulo', $data->libTitulo);
+        $stmt->bindParam(':libAnio', $data->libAnio);
+        $stmt->bindParam(':EditorialID', $data->EditorialID);
+        $stmt->bindParam(':autorID', $data->autorID);
+        $stmt->bindParam(':MateriaID', $data->MateriaID);
+        $stmt->bindParam(':libNotaContenido', $data->libNotaContenido);
+
+        if ($stmt->execute()) {
+            $idPost = $pdo->lastInsertId();
+            header('Content-Type: application/json');
+            echo json_encode(['id' => $idPost, 'message' => 'Libro agregado correctamente']);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Error al agregar el libro']);
+        }
+        
+        
+    } 
+}

@@ -11,28 +11,22 @@
                 <label class="form-label">Año</label>
                 <input type="text" class="form-control" formControlName="libAnio" placeholder="Ingrese el año">
             </div>
-            <div class="mb-3"> 
-                 <label class="form-label">Signatura</label>
-                 <select formControlName="SigTopograficaID" class="form-control">
-                  <option *ngFor="let signatura of listadosignaturas" [value]="signatura.idSigTopografica">{{  signatura.topNombre }}</option>
-                </select>
-            </div>
+           
             <div class="mb-3">
               <label for="editorial" class="form-label">Editorial:</label>
               <select formControlName="EditorialID" class="form-control" id="editorial">
                 <option *ngFor="let editorial of editoriales" [value]="editorial.idEditorial">{{ editorial.ediNombre }}</option>
               </select>
             </div>
-            <div class="mb-3"> 
-              <label class="form-label">Cantidad</label>
-              <input type="text" class="form-control" formControlName="libCantidad" placeholder="Ingrese la cantidad de libros">
-          </div>
+            
+
           <div class="mb-3">
             <label for="autor" class="form-label">Autores:</label>
             <select formControlName="autorID" class="form-control" id="autorID">
               <option *ngFor="let autores of listadoautores" [value]="autores.idAutor">{{ autores.autNombre }}</option>
             </select>
           </div>
+
             
             <div class="mb-3">
               <label for="" class="form-label">Materia</label>
@@ -45,8 +39,8 @@
                 <input  type="text" class="form-control" formControlName="libNotaContenido" placeholder="Escribe la Nota Contenido"/>
             </div>
             <div class="btn-group" role="group" aria-label="">
-                <button type="submit" class="btn btn-success" [disabled]="//formularioDeLibros.valid != true" >Agregar</button>
-                <button type="button" class="btn btn-primary" routerLink="/libros-listar">Cancelar</button>
+              <button type="submit" class="btn btn-success" [disabled]="//formularioDeLibros.valid != true" >Agregar</button>
+              <button type="button" class="btn btn-primary" routerLink="/libros-listar">Cancelar</button>
             </div>
         </form>
     </div>
