@@ -1,1 +1,75 @@
-<h1>hellou</h1>
+<div class="card">
+    <div class="card-header">Editar Libros</div>
+    <div class="card-body">
+      <form [formGroup]="formularioDeLibros" (ngSubmit)="actualizarLibro()">
+        <div class="mb-3">
+          <label for="" class="form-label">Titulo</label>
+          <input [ngClass]="{'is-invalid': hasErrors('libTitulo', 'required')}" type="text" class="form-control" formControlName="libTitulo" placeholder="Escribe un titulo" />
+          <div class="text-danger" *ngIf="hasErrors('libTitulo', 'required')">
+            Ingrese el Titulo del Libro.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Año</label>
+          <input [ngClass]="{'is-invalid': hasErrors('libAnio', 'required')}" type="text" class="form-control" formControlName="libAnio" placeholder="Escribe el Año" />
+          <div class="text-danger" *ngIf="hasErrors('libAnio', 'required')">
+            Ingrese el Año que de lanzo el Libro.
+          </div>
+        </div>
+       
+  
+        <div class="mb-3">
+          <label [ngClass]="{'is-invalid': hasErrors('EditorialID', 'required')}" for="editorial" class="form-label">Editorial:</label>
+          <select formControlName="EditorialID" class="form-control" id="editorial">
+            <option *ngFor="let editorial of editoriales" [value]="editorial.idEditorial">{{ editorial.ediNombre }}</option>
+          </select>
+          <div class="text-danger" *ngIf="hasErrors('EditorialID', 'required')">
+            Seleccione el Editorial del Libro.
+          </div>
+        </div>
+        <div class="mb-3"> 
+          <label [ngClass]="{'is-invalid': hasErrors('libCantidad', 'required')}" class="form-label">Cantidad de Libros</label>
+          <input type="text" class="form-control" formControlName="libCantidad" placeholder="Ingrese la cantidad de libros">
+          <div class="text-danger" *ngIf="hasErrors('libCantidad', 'required')">
+            Ingrese la cantidad de Libros existentes.
+          </div>
+      </div>
+     
+    
+  
+      <div class="mb-3">
+        <label [ngClass]="{'is-invalid': hasErrors('autorID', 'required')}" for="Autor" class="form-label">Autores:</label>
+        <select formControlName="autorID" class="form-control" id="autorID">
+          <option *ngFor="let autores of listadoautores" [value]="autores.idAutor">{{ autores.autNombre + ' ' +  autores.autApellido }}</option>
+        </select>
+        <div class="text-danger" *ngIf="hasErrors('autorID', 'required')">
+          Seleccione el Autor del Libro.
+        </div>
+      </div>
+        
+        <div class="mb-3">
+          <label [ngClass]="{'is-invalid': hasErrors('MateriaID', 'required')}" for="" class="form-label">Materia</label>
+          <select formControlName="MateriaID" class="form-control" id="editorial">
+            <option *ngFor="let materia of listadoMaterias" [value]="materia.idMateria">{{ materia.matNombre }}</option>
+          </select>
+          <div class="text-danger" *ngIf="hasErrors('libTitulo', 'required')">
+            Seleccione la materia del Libro.
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <label  [ngClass]="{'is-invalid': hasErrors('libNotaContenido', 'required')}" for="" class="form-label">Contenido</label>
+  
+          <input type="text" class="form-control" formControlName="libNotaContenido" placeholder="Escribe la Nota Contenido" />
+          <div class="text-danger" *ngIf="hasErrors('libNotaContenido', 'required')">
+            Ingrese un breve contenido del Libro.
+          </div>
+        </div>
+  
+        <div class="btn-group" role="group">
+          <button type="submit" class="btn btn-success">Guardar</button>
+          <button type="button" class="btn btn-primary" routerLink="/libros-listar">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
