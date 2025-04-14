@@ -18,7 +18,7 @@ export interface Libro{
 })
 export class LibrosService {
 
-  private api='http://localhost/prueba/api/libros.php'
+  private api='http://localhost/NOSRECIBIMOono/api/libros.php'
 
   constructor(private clienteHttp: HttpClient) { }
 

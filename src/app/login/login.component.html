@@ -1,0 +1,30 @@
+<div class="container mt-5" style="max-width: 400px;">
+    <h2 class="text-center">Iniciar Sesión</h2>
+    <form (ngSubmit)="login()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="contrasena" class="form-label">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="contrasena"
+          [(ngModel)]="contrasena"
+          name="contrasena"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Entrar</button>
+    </form>
+    <p *ngIf="error" class="text-danger mt-3">{{ error }}</p>
+  </div>
+  

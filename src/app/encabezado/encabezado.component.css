@@ -1,17 +1,32 @@
 .app-header {
-    display: flex;
-    align-items: center;
-    background-color: #007bff; /* Color de fondo */
-    color: white; /* Color del texto */
-    padding: 1px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+}
+.app-title {
+  flex-grow: 1;
   
-  .logo img {
-    height: 30px; /* Ajusta el tamaño del logo */
-    margin-right: 10px; /* Espacio entre el logo y el título */
-  }
-  
-  .app-title {
-    margin: 0; /* Elimina el margen del título */
-  }
-  
+}
+
+
+.biblioteca-link {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.2); 
+  padding: 5px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.biblioteca-link:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.logo img {
+  height: 30px;
+  margin-right: 10px;
+}

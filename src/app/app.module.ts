@@ -18,6 +18,7 @@ import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { EditorialesListarComponent } from './editoriales/editoriales-listar/editoriales-listar.component';
 import { EditorialesEditarComponent } from './editoriales/editoriales-editar/editoriales-editar.component';
 import { EditorialesCargarComponent } from './editoriales/editoriales-cargar/editoriales-cargar.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { EditorialesCargarComponent } from './editoriales/editoriales-cargar/edi
     EncabezadoComponent,
     EditorialesListarComponent,
     EditorialesEditarComponent,
-    EditorialesCargarComponent
+    EditorialesCargarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -20,7 +20,7 @@ export interface Editorial{
 })
 export class EditorialesService {
 
-  API: string = 'http://localhost/prueba/api/editoriales.php';
+  API: string = 'http://localhost/NOSRECIBIMOono/api/editoriales.php';
 
   constructor(private clienteHttp:HttpClient) { }
 

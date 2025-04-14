@@ -11,7 +11,7 @@ export interface Materias {
   providedIn: 'root'
 })
 export class MateriasService {
-  private api = 'http://localhost/prueba/api/materias.php';
+  private api = 'http://localhost/NOSRECIBIMOono/api/materias.php';
 
   constructor(private clienteHttp: HttpClient) {}
 

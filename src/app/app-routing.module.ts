@@ -10,6 +10,8 @@ import { AutoresCargarComponent } from './autores/autores-cargar/autores-cargar.
 import { EditorialesListarComponent } from './editoriales/editoriales-listar/editoriales-listar.component';
 import { EditorialesCargarComponent } from './editoriales/editoriales-cargar/editoriales-cargar.component';
 import { EditorialesEditarComponent } from './editoriales/editoriales-editar/editoriales-editar.component';
+import { LoginComponent } from './login/login.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/dash', pathMatch: 'full' },  // Ruta por defecto
@@ -25,6 +27,11 @@ const routes: Routes = [
   { path: 'editoriales-listar', component: EditorialesListarComponent },
   { path: 'autores-cargar', component: EditorialesCargarComponent },
   { path: 'editoriales-editar/:id', component: EditorialesEditarComponent},
+
+
+  { path: 'login', component: LoginComponent},
+
+
 
 
 

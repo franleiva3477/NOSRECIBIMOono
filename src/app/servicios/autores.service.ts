@@ -18,7 +18,7 @@ export interface Autor {
   providedIn: 'root'
 })
 export class AutoresService {
-  private apiUrl = 'http://localhost/prueba/api/autores.php';
+  private apiUrl = 'http://localhost/NOSRECIBIMOono/api/autores.php';
  
   constructor(private http: HttpClient) { }
 
