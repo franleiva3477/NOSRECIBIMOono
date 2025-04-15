@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS"); // Asegúrate de incluir DELETE aquí
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS"); 
 header("Content-Type: application/json; charset=UTF-8");
 include 'conexion.php';
 $pdo = new conexion();
@@ -15,7 +15,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
        handlePostRequest($pdo);
         break;
     case 'PUT':
-       // handlePutRequest($pdo);
+       handlePutRequest($pdo);
         break;
     case 'DELETE':
        // handleDeleteRequest($pdo);
@@ -33,7 +33,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 function handleGetRequest($pdo) {
     // Si se proporciona el parámetro 'idLibro', busca por ID con INNER JOIN
     if (isset($_GET['idLibro'])) {
-        $sql = $pdo->prepare("SELECT idLibro,libTitulo,libAnio, libCantidad, autorID, EditorialID,MateriaID,libNotaDeContenido FROM `Libros` where idLibro = :idLibro"); 
+        $sql = $pdo->prepare("SELECT idLibro,libTitulo,libAnio, autorID, EditorialID,MateriaID,libNotaDeContenido FROM `Libros` where idLibro = :idLibro"); 
         $sql->bindValue(':idLibro', $_GET['idLibro']);
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -99,3 +99,39 @@ function handlePostRequest($pdo) {
         
     } 
 }
+
+
+
+    // Creamos la consulta UPDATE
+    function handlePutRequest($pdo) {
+        $data = json_decode(file_get_contents("php://input"));
+        $idLibro = $_GET['idLibro'] ?? null;
+    
+        // Verifica si se proporciona 'idLibro' y otros campos necesarios
+        if ($idLibro && isset($data->libTitulo) && isset($data->libAnio)  && isset($data->EditorialID) && isset($data->MateriaID) && isset($data->libNotaDeContenido)) {
+            $sql = "UPDATE Libros 
+                    SET libTitulo = :libTitulo, libAnio = :libAnio,
+                        EditorialID = :EditorialID,  autorID = :autorID, MateriaID = :MateriaID, libNotaDeContenido = :libNotaDeContenido 
+                    WHERE idLibro = :idLibro";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':libTitulo', $data->libTitulo);
+            $stmt->bindParam(':libAnio', $data->libAnio);
+            $stmt->bindParam(':EditorialID', $data->EditorialID);
+            $stmt->bindParam(':autorID', $data->autorID);
+            $stmt->bindParam(':MateriaID', $data->MateriaID);
+            $stmt->bindParam(':libNotaDeContenido', $data->libNotaDeContenido);
+            $stmt->bindParam(':idLibro', $idLibro);
+    
+            if ($stmt->execute()) {
+                header("HTTP/1.1 200 OK");
+                echo json_encode(['message' => 'Actualización exitosa']);
+            } else {
+                header("HTTP/1.1 500 Internal Server Error");
+                echo json_encode(['error' => 'No se pudo actualizar el libro']);
+            }
+        } else {
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(['error' => 'Entrada inválida']);
+        }
+        exit;
+    }
