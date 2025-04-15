@@ -12,7 +12,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         handleGetRequest($pdo);
         break;
     case 'POST':
-       // handlePostRequest($pdo);
+       handlePostRequest($pdo);
         break;
     case 'PUT':
        // handlePutRequest($pdo);
@@ -33,7 +33,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 function handleGetRequest($pdo) {
     // Si se proporciona el parámetro 'idLibro', busca por ID con INNER JOIN
     if (isset($_GET['idLibro'])) {
-        $sql = $pdo->prepare("SELECT idLibro,libTitulo,libAnio,SigTopograficaID, libCantidad, autorID, EditorialID,MateriaID,libNotaContenido FROM `Libros` where idLibro = :idLibro"); 
+        $sql = $pdo->prepare("SELECT idLibro,libTitulo,libAnio, libCantidad, autorID, EditorialID,MateriaID,libNotaDeContenido FROM `Libros` where idLibro = :idLibro"); 
         $sql->bindValue(':idLibro', $_GET['idLibro']);
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -44,12 +44,11 @@ function handleGetRequest($pdo) {
     elseif (isset($_GET['libTitulo'])) {
         $libTitulo = strtolower($_GET['libTitulo']);
         $sql = $pdo->prepare("
-            SELECT l.idLibro, l.libTitulo, l.libAnio, l.libNotaContenido, 
-                   s.topNombre AS sigtopografica, 
+            SELECT l.idLibro, l.libTitulo, l.libAnio, l.libNotaDeContenido, 
+                   
                    e.ediNombre AS editorial, 
                    m.matNombre AS materia
             FROM Libros l
-            INNER JOIN SigTopografica s ON l.SigTopograficaID = s.idSigTopografica
             INNER JOIN Editorial e ON l.EditorialID = e.idEditorial
             INNER JOIN Materia m ON l.MateriaID = m.idMateria
             WHERE LOWER(l.libTitulo) LIKE :libTitulo
@@ -76,17 +75,17 @@ function handlePostRequest($pdo) {
     $data = json_decode(file_get_contents("php://input"));
     
     // Verifica si se proporcionan los campos necesarios
-    if (isset($data->libTitulo) && isset($data->libAnio)  && isset($data->EditorialID) 
-    && isset($data->autorID) && isset($data->MateriaID) && isset($data->libNotaContenido)) {
-        $sql = "INSERT INTO LIBROS (libTitulo, libAnio, ,EditorialID,  autorID, MateriaID, libNotaContenido) 
-                VALUES (:libTitulo, :libAnio,  :EditorialID,:autorID, :MateriaID, :libNotaContenido)";
+    if (isset($data->libTitulo) && isset($data->libAnio)  && isset($data->EditorialID)  && isset($data->autorID) 
+    && isset($data->autorID) && isset($data->MateriaID) && isset($data->libNotaDeContenido)) {
+        $sql = "INSERT INTO LIBROS (libTitulo, libAnio ,EditorialID,  autorID, MateriaID, libNotaDeContenido) 
+                VALUES (:libTitulo, :libAnio,  :EditorialID,  :autorID,  :MateriaID, :libNotaDeContenido)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':libTitulo', $data->libTitulo);
         $stmt->bindParam(':libAnio', $data->libAnio);
         $stmt->bindParam(':EditorialID', $data->EditorialID);
         $stmt->bindParam(':autorID', $data->autorID);
         $stmt->bindParam(':MateriaID', $data->MateriaID);
-        $stmt->bindParam(':libNotaContenido', $data->libNotaContenido);
+        $stmt->bindParam(':libNotaDeContenido', $data->libNotaDeContenido);
 
         if ($stmt->execute()) {
             $idPost = $pdo->lastInsertId();

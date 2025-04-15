@@ -35,7 +35,7 @@ export class LibrosCargarComponent implements OnInit{
       libCantidad: ['', [Validators.required]],
       autorID: ['', [Validators.required]],
       MateriaID: ['', [Validators.required]],
-      libNotaContenido: ['', [Validators.required]]
+      libNotaDeContenido: ['', [Validators.required]]
     })
    }
   ngOnInit(): void {
