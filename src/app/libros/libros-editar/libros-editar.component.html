@@ -27,13 +27,6 @@
             Seleccione el Editorial del Libro.
           </div>
         </div>
-        <div class="mb-3"> 
-          <label [ngClass]="{'is-invalid': hasErrors('libCantidad', 'required')}" class="form-label">Cantidad de Libros</label>
-          <input type="text" class="form-control" formControlName="libCantidad" placeholder="Ingrese la cantidad de libros">
-          <div class="text-danger" *ngIf="hasErrors('libCantidad', 'required')">
-            Ingrese la cantidad de Libros existentes.
-          </div>
-      </div>
      
     
   
@@ -58,10 +51,10 @@
         </div>
         
         <div class="mb-3">
-          <label  [ngClass]="{'is-invalid': hasErrors('libNotaContenido', 'required')}" for="" class="form-label">Contenido</label>
+          <label  [ngClass]="{'is-invalid': hasErrors('libNotDeaContenido', 'required')}" for="" class="form-label">Contenido</label>
   
-          <input type="text" class="form-control" formControlName="libNotaContenido" placeholder="Escribe la Nota Contenido" />
-          <div class="text-danger" *ngIf="hasErrors('libNotaContenido', 'required')">
+          <input type="text" class="form-control" formControlName="libNotaDeContenido" placeholder="Escribe la Nota Contenido" />
+          <div class="text-danger" *ngIf="hasErrors('libNotaDeContenido', 'required')">
             Ingrese un breve contenido del Libro.
           </div>
         </div>

@@ -2,7 +2,7 @@
     <div class="card-header">Agreagar Libros </div>
     <div class="card-body">
         
-        <form  (submit)="cargarLibros()">
+        <form  [formGroup]="formularioDeLibros"  (submit)="cargarLibros()">
             <div class="mb-3">
                 <label class="form-label">Titulo</label>
                 <input type="text"class="form-control" name="" formControlName="libTitulo" id="" placeholder="Escribe un titulo" />

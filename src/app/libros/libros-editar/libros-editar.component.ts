@@ -11,6 +11,7 @@ import { MateriasService } from 'src/app/servicios/materias.service';
 import { AutoresService } from 'src/app/servicios/autores.service';
 
 
+
 @Component({
   selector: 'app-libros-editar',
   templateUrl: './libros-editar.component.html',
@@ -44,13 +45,14 @@ export class LibrosEditarComponent implements OnInit {
     this.materiasService.ObtenerMaterias().subscribe((respuesta)=>{
       console.log(respuesta);
       this.listadoMaterias = respuesta;
-    })
+    });
+    
   
     this.autoresService.getAutor().subscribe((respuesta)=>{
       console.log(respuesta);
       this.listadoautores= respuesta;
     }
-    )
+    );
 
     
 
@@ -62,12 +64,10 @@ export class LibrosEditarComponent implements OnInit {
     this.formularioDeLibros = this.formulario.group({
       libTitulo: ['', [Validators.required]],
       libAnio: ['', [Validators.required]],
-      SigTopograficaID: ['', [Validators.required]],
       EditorialID: ['', [Validators.required]],
-      libCantidad: ['', [Validators.required]],
       autorID: ['', [Validators.required]],
       MateriaID: ['', [Validators.required]],
-      libNotaContenido: ['', [Validators.required]]
+      libNotDeaContenido: ['', [Validators.required]]
     });
 
     
@@ -77,10 +77,9 @@ export class LibrosEditarComponent implements OnInit {
         libTitulo: respuesta[0]['libTitulo'],
         libAnio: respuesta[0]['libAnio'],
         EditorialID: respuesta[0]['EditorialID'],
-        libCantidad: respuesta[0]['libCantidad'],
         autorID: respuesta[0]['autorID'],
         MateriaID: respuesta[0]['MateriaID'],
-        libNotaContenido: respuesta[0]['libNotaContenido']
+        libNotDeaContenido: respuesta[0]['libNotDeaContenido']
       });
     });
   }
@@ -103,7 +102,7 @@ export class LibrosEditarComponent implements OnInit {
         () => {
           console.log('Libro actualizado con éxito');
       
-          this.ruteador.navigateByUrl('/biblioteca/libros-listado');
+          this.ruteador.navigateByUrl('/libros-listar');
         }
       );
     } else {

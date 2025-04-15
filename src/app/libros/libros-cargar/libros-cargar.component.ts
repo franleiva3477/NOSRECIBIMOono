@@ -5,6 +5,8 @@ import { LibrosService, Libro } from 'src/app/servicios/libros.service';
 import { EditorialesService } from 'src/app/servicios/editoriales.service';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { AutoresService } from 'src/app/servicios/autores.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -25,7 +27,9 @@ export class LibrosCargarComponent implements OnInit{
    private editorialesService: EditorialesService,
     private materiasService: MateriasService,
     private autoresService: AutoresService,
-    private routeador: Router
+    private routeador: Router,
+    private rutaActiva: ActivatedRoute
+
   ){
     
     this.formularioDeLibros=this.formulario.group({
@@ -58,7 +62,7 @@ export class LibrosCargarComponent implements OnInit{
   }
 
   cargarLibros(): any {
-    console.log("Formulario enviado:", this.formularioDeLibros.value); 
+    console.log("Formulario enviado:", this.formularioDeLibros.patchValue); 
     this.servicioLibros.agregarLibros(this.formularioDeLibros.value).subscribe(
       (respuesta) => {
         console.log("Libro agregado:", respuesta);
