@@ -4,17 +4,17 @@
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">Titulo</th>
-        <th scope="col">Año</th>
-        <th scope="col">Contenido</th>
-        <th scope="col">Editorial</th>
+        <th scope="col">titulo</th>
+        <th scope="col">año</th>
+        <th scope="col">contenido</th>
+        <th scope="col">editorial</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let libro of libros; let idControl = index">
         <td>{{libro.libTitulo}}</td>
         <td>{{libro.libAnio}}</td>
-        <td>{{libro.libNotaDeContenido}}</td>
+        <td>{{libro.autorID}}</td>
         <td>{{libro.editorialID}}</td>
         <td>
           <a
