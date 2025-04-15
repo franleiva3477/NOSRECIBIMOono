@@ -1,34 +1,36 @@
-<div class="container mt-3">
-    <h2>Cargar Autor</h2>
-    <div class="input">
-      <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="autNombre">Nombre</label>
-          <input type="text" id="autNombre" [(ngModel)]="autor.autNombre" name="autNombre" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="autApellido">Apellido</label>
-          <input type="text" id="autApellido" [(ngModel)]="autor.autApellido" name="autApellido" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="autFecNac">Fecha de Nacimiento</label>
-          <input type="date" id="autFecNac" [(ngModel)]="autor.autFecNac" name="autFecNac" required />
-        </div>
-  
-        <div class="form-group">
-          <label for="autBio">Biografía</label>
-          <textarea id="autBio" [(ngModel)]="autor.autBiografia" name="autBio"></textarea>
-        </div>
-  
-        <div class="form-group">
-          <label for="autFecDes">Fecha de Defunción</label>
-          <input type="date" id="autFecDes" [(ngModel)]="autor.autFecDes" name="autFecDes" />
-        </div>
-  
-        <button type="submit">Guardar Autor</button>
-      </form>
+<div class="container mt-4">
+  <h2 class="mb-4">Cargar Autor</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    
+    <div class="mb-3">
+      <label for="autNombre" class="form-label">Nombre</label>
+      <input type="text" id="autNombre" class="form-control" [(ngModel)]="autor.autNombre" name="autNombre" required>
     </div>
-  </div>
-  
+
+    <div class="mb-3">
+      <label for="autApellido" class="form-label">Apellido</label>
+      <input type="text" id="autApellido" class="form-control" [(ngModel)]="autor.autApellido" name="autApellido" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="fechaNac" class="form-label">Fecha de Nacimiento</label>
+      <input type="date" class="form-control" id="fechaNac" [(ngModel)]="autor.autFecNac" name="autFecNac">
+    </div>
+
+    <div class="mb-3">
+      <label for="fechaDes" class="form-label">Fecha de Fallecimiento</label>
+      <input type="date" class="form-control" id="fechaDes" [(ngModel)]="autor.autFecDes" name="autFecDes">
+    </div>
+
+    <div class="mb-3">
+      <label for="autBio" class="form-label">Biografía</label>
+      <textarea id="autBio" class="form-control" rows="4" [(ngModel)]="autor.autBiografia" name="autBio"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+      <i class="fa-solid fa-floppy-disk me-1"></i> Guardar Autor
+    </button>
+    
+  </form>
+</div>

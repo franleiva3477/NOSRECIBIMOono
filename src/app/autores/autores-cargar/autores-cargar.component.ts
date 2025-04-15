@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Autor, AutoresService } from 'src/app/servicios/autores.service';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-autores-cargar',
@@ -9,12 +8,11 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./autores-cargar.component.css']
 })
 export class AutoresCargarComponent implements OnInit {
-  
-  // El modelo de autor que será llenado desde el formulario
+
   autor: Autor = {
     autNombre: '',
     autApellido: '',
-    autFecNac: '',
+    autFecNac: '', // ISO format 'YYYY-MM-DD'
     autBiografia: '',
     autFecDes: ''
   };
@@ -27,15 +25,13 @@ export class AutoresCargarComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    // Llamamos al servicio para agregar un nuevo autor
+    console.log("Datos del formulario enviados:", this.autor);
+    
+    // Enviar los datos al backend
     this.autorservice.addAutor(this.autor).subscribe(
       (data) => {
         console.log('Autor creado con éxito', data);
-        // Después de crear el autor, puedes redirigir a otra página, por ejemplo, la lista de autores
-        this.router.navigateByUrl('/biblioteca/autores-listar');
-      },
-      (error) => {
-        console.error('Error al crear el autor', error);
+        this.router.navigateByUrl('/autores-listar');
       }
     );
   }

@@ -1,35 +1,39 @@
-<div class="autores-listar-container mt-3 mb-3">
-    <h2 id="autores-grid-label">Lista de Autores</h2>
-    <table class="table">
-      <thead>
+<div class="container mt-4 autores-listar-container">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 id="autores-grid-label" class="mb-0">Lista de Autores</h2>
+    <a routerLink="/autores-cargar" class="btn btn-primary">
+      Agregar Autor
+    </a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle text-center">
+      <thead class="table-dark">
         <tr>
           <th>Nombre</th>
           <th>Apellido</th>
-          <th>Nacimiento</th>
+          <th>Fecha de Nacimiento</th>
           <th>Biografía</th>
-          <th>Deceso</th>
+          <th>Fecha de Fallecimiento</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let aut of autores">
           <td>{{ aut.autNombre }}</td>
-          <td>{{ aut.autApellido }}</td>    
-          <td>{{ aut.autFecNac }}</td>
+          <td>{{ aut.autApellido }}</td>
+          <td>{{ aut.autFechaNac }}</td>
           <td>{{ aut.autBiografia }}</td>
-          <td>{{ aut.autFecDes }}</td>
-          <td colspan="5">
-            <a
-                  class="btn btn-warning"
-                  routerLink="/autores-editar/{{ aut.idAutor }}"
-                  >editar<i class="fa-solid fa-pen"></i></a
-                >
+          <td>{{ aut.autFechaDes }}</td>
+          <td>
+            <a class="btn btn-warning btn-sm" [routerLink]="['/autores-editar', aut.idAutor]">
+              <i class="fa-solid fa-pen me-1"></i> Editar
+            </a>
           </td>
         </tr>
       </tbody>
     </table>
-    <div class="d-flex flex-row align-items-center justify-content-end mt-3">
-      <button class="btn btn-success btn-lg" (click)="navigateToCreate()"> <!-- Aumentar el tamaño del botón -->
-        <i class="fas fa-plus me-2 " routerLink="/autores-cargar"></i> Crear
-      </button>
-    </div>
   </div>
+
+</div>

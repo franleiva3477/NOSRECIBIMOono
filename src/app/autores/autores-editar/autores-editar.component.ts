@@ -63,7 +63,7 @@ export class AutoresEditarComponent implements OnInit {
     this.autoresService.editAutor(autorActualizado).subscribe({
       next: () => {
         console.log('Autor actualizado exitosamente'); // Confirma que la actualización fue exitosa
-        this.router.navigate(['/biblioteca/autores-listar']);
+        this.router.navigate(['/autores-listar']);
       },
       error: (err) => {
         console.error('Error al editar el autor:', err); // Muestra el error en caso de que ocurra
@@ -73,6 +73,6 @@ export class AutoresEditarComponent implements OnInit {
 
   Cancelar(): void {
     console.log('Cancelando la edición del autor'); // Confirma que se está cancelando
-    this.router.navigateByUrl('/biblioteca/autores-listar');
+    this.router.navigateByUrl('/autores-listar');
   }
 }

@@ -21,9 +21,6 @@ export class AutoresListarComponent {
     this.autoresService.getAutor().subscribe(
       (data: Autor[] )=> {
           this.autores = data;
-      },
-      (error) => {
-        console.error('Error al obtener autores:', error);
       }
     );
   }
