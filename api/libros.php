@@ -18,7 +18,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
        handlePutRequest($pdo);
         break;
     case 'DELETE':
-       // handleDeleteRequest($pdo);
+        handleDeleteRequest($pdo);
         break;
     case 'OPTIONS':
         // Maneja las solicitudes preflight
@@ -135,3 +135,27 @@ function handlePostRequest($pdo) {
         }
         exit;
     }
+
+    function handleDeleteRequest($pdo) {
+        $idLibro = $_GET['idLibro'] ?? null;
+    
+        if ($idLibro) {
+            $sql = "DELETE FROM Libros WHERE idLibro = :idLibro";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':idLibro', $idLibro);
+    
+            if ($stmt->execute()) {
+                header("HTTP/1.1 200 OK");
+                echo json_encode(['message' => 'Libro eliminado correctamente']);
+            } else {
+                header("HTTP/1.1 500 Internal Server Error");
+                echo json_encode(['error' => 'No se pudo eliminar el libro']);
+            }
+        } else {
+            header("HTTP/1.1 400 Bad Request");
+            echo json_encode(['error' => 'Falta el parámetro idLibro']);
+        }
+    
+        exit;
+    }
+    
