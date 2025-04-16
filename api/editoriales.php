@@ -49,7 +49,7 @@ Retorno: Información de los editoriales cuyo nombre contenga "Planeta".
     */
     // Si se proporciona el parámetro 'idEditorial', busca por ID
     if (isset($_GET['idEditorial'])) {
-        $sql = $pdo->prepare("SELECT * FROM Editorial WHERE idEditorial=:idEditorial");
+        $sql = $pdo->prepare("SELECT * FROM Editoriales WHERE idEditorial=:idEditorial");
         $sql->bindValue(':idEditorial', $_GET['idEditorial']);
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -60,7 +60,7 @@ Retorno: Información de los editoriales cuyo nombre contenga "Planeta".
     // Si se proporciona el autámetro 'ediNombre', busca por nombre
     elseif (isset($_GET['ediNombre'])) {
         $ediNombre = strtolower($_GET['ediNombre']);
-        $sql = $pdo->prepare("SELECT * Editorial WHERE LOWER(ediNombre) LIKE :ediNombre");
+        $sql = $pdo->prepare("SELECT * Editoriales WHERE LOWER(ediNombre) LIKE :ediNombre");
         $sql->bindValue(':ediNombre', '%' . $ediNombre . '%', PDO::PARAM_STR);
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -88,15 +88,15 @@ function handlePostRequest($pdo) {
     $data = json_decode(file_get_contents("php://input"));
     // Verifica si se proporciona 'ediNombre'
     if (isset($data->ediNombre)) {
-        $sql = "INSERT INTO Editorial (ediDireccion,ediEmail,ediNombre,ediTelefono,LocalidadID) 
-        VALUES ((:ediDireccion), (:ediEmail),(:ediNombre),(:ediTelefono),(:LocalidadID))";
+        $sql = "INSERT INTO Editoriales (ediDireccion, ediEmail, ediNombre, ediTelefono) 
+        VALUES (:ediDireccion, :ediEmail, :ediNombre, :ediTelefono)";
+
         
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':ediDireccion', $data->ediDireccion);
         $stmt->bindParam(':ediEmail', $data->ediEmail);
         $stmt->bindParam(':ediNombre', $data->ediNombre);
         $stmt->bindParam(':ediTelefono', $data->ediTelefono);
-        $stmt->bindParam(':LocalidadID', $data->LocalidadID);
 
         if ($stmt->execute()) {
             $idPost = $pdo->lastInsertId();
@@ -124,8 +124,8 @@ function handlePutRequest($pdo) {
     $data = json_decode(file_get_contents("php://input"));
     // Verifica si se proporcionan 'idEditorial' y 'ediNombre'
     if (isset($data->idEditorial) && isset($data->ediNombre)) {
-        $sql = "UPDATE Editorial SET ediDireccion = (:ediDireccion), ediEmail = (:ediEmail), ediNombre = (:ediNombre),
-         ediTelefono = (:ediTelefono), LocalidadID = (:LocalidadID) WHERE idEditorial = (:idEditorial)";
+        $sql = "UPDATE Editoriales SET ediDireccion = (:ediDireccion), ediEmail = (:ediEmail), ediNombre = (:ediNombre),
+         ediTelefono = (:ediTelefono) WHERE idEditorial = (:idEditorial)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':ediDireccion', $data->ediDireccion);
         $stmt->bindParam(':ediEmail', $data->ediEmail);
@@ -155,7 +155,7 @@ Retorno: Mensaje de eliminación exitosa.
 function handleDeleteRequest($pdo) {
     // Verifica si se proporciona 'idEditorial'
     if (isset($_GET['idEditorial'])) {
-        $sql = "DELETE FROM Editorial WHERE idEditorial=:idEditorial";
+        $sql = "DELETE FROM Editoriales WHERE idEditorial=:idEditorial";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':idEditorial', $_GET['idEditorial']);
         if ($stmt->execute()) {

@@ -1,47 +1,57 @@
-<div class="card">
-    <div class="card-header">Agreagar Libros </div>
-    <div class="card-body">
-        
-        <form  [formGroup]="formularioDeLibros"  (submit)="cargarLibros()">
-            <div class="mb-3">
-                <label class="form-label">Titulo</label>
-                <input type="text"class="form-control" name="" formControlName="libTitulo" id="" placeholder="Escribe un titulo" />
-            </div>
-            <div class="mb-3"> 
-                <label class="form-label">Año</label>
-                <input type="text" class="form-control" formControlName="libAnio" placeholder="Ingrese el año">
-            </div>
-           
-            <div class="mb-3">
-              <label for="editorial" class="form-label">Editorial:</label>
-              <select formControlName="EditorialID" class="form-control" id="editorial">
-                <option *ngFor="let editorial of editoriales" [value]="editorial.idEditorial">{{ editorial.ediNombre }}</option>
-              </select>
-            </div>
-            
-
-          <div class="mb-3">
-            <label for="autor" class="form-label">Autores:</label>
-            <select formControlName="autorID" class="form-control" id="autorID">
-              <option *ngFor="let autores of listadoautores" [value]="autores.idAutor">{{ autores.autNombre }}</option>
-            </select>
-          </div>
-
-            
-            <div class="mb-3">
-              <label for="" class="form-label">Materia</label>
-              <select formControlName="MateriaID" class="form-control" id="editorial">
-                <option *ngFor="let materia of listadoMaterias" [value]="materia.idMateria">{{ materia.matNombre }}</option>
-              </select>
-            </div>
-            <div class="mb-3"> 
-                 <label for="" class="form-label">Contenido</label>
-                <input  type="text" class="form-control" formControlName="libNotaDeContenido" placeholder="Escribe la Nota Contenido"/>
-            </div>
-            <div class="btn-group" role="group" aria-label="">
-              <button type="submit" class="btn btn-success" [disabled]="//formularioDeLibros.valid != true" >Agregar</button>
-              <button type="button" class="btn btn-primary" routerLink="/libros-listar">Cancelar</button>
-            </div>
-        </form>
-    </div>
+<div class="card mt-4">
+  <div class="card-header">
+    Agregar Libro
   </div>
+  <div class="card-body">
+
+    <form [formGroup]="formularioDeLibros" (submit)="cargarLibros()">
+
+      <div class="mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input type="text" id="titulo" class="form-control" formControlName="libTitulo" placeholder="Escribe un título" />
+      </div>
+
+      <div class="mb-3">
+        <label for="anio" class="form-label">Año</label>
+        <input type="text" id="anio" class="form-control" formControlName="libAnio" placeholder="Ingrese el año" />
+      </div>
+
+      <div class="mb-3">
+        <label for="editorial" class="form-label">Editorial</label>
+        <select formControlName="EditorialID" class="form-control" id="editorial">
+          <option *ngFor="let editorial of editoriales" [value]="editorial.idEditorial">{{ editorial.ediNombre }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="autorID" class="form-label">Autor</label>
+        <select formControlName="autorID" class="form-control" id="autorID">
+          <option *ngFor="let autor of listadoautores" [value]="autor.idAutor">{{ autor.autNombre }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="materia" class="form-label">Materia</label>
+        <select formControlName="MateriaID" class="form-control" id="materia">
+          <option *ngFor="let materia of listadoMaterias" [value]="materia.idMateria">{{ materia.matNombre }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="contenido" class="form-label">Nota de Contenido</label>
+        <input type="text" id="contenido" class="form-control" formControlName="libNotaDeContenido" placeholder="Escribe la nota de contenido" />
+      </div>
+
+      <div class="btn-group" role="group">
+        <button type="submit" class="btn btn-success" [disabled]="formularioDeLibros.invalid">
+          Agregar
+        </button>
+        <button type="button" class="btn btn-primary" routerLink="/libros-listar">
+          Cancelar
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>

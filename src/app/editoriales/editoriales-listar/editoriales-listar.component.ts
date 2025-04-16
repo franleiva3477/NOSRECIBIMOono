@@ -64,7 +64,7 @@ export class EditorialesListarComponent implements OnInit {
         
       });
     }
-    this.ruteador.navigateByUrl('/biblioteca/editorial-listar');
+    this.ruteador.navigateByUrl('/editoriales-listar');
     this.page = 0;
   }
 

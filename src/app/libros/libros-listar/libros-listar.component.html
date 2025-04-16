@@ -1,38 +1,44 @@
+<div class="container mt-4 libros-listar-container">
 
-<a routerLink="/libros-cargar" class="btn btn-primary"> Agregar libros</a>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Lista de Libros</h2>
+    <a routerLink="/libros-cargar" class="btn btn-primary">
+      Agregar Libro
+    </a>
+  </div>
 
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">titulo</th>
-        <th scope="col">año</th>
-        <th scope="col">Autor</th>
-        <th scope="col">Editorial</th>
-        <th scope="col">Materia</th>
-        <th scope="col">Nota De Contenido</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let libro of libros; let idControl = index">
-        <td>{{libro.libTitulo}}</td>
-        <td>{{libro.libAnio}}</td>
-        <td>{{libro.autorID}}</td>
-        <td>{{libro.editorialID}}</td>
-        <td>{{ libro.materiaID }}</td>
-        <td>{{libro.libNotaDeContenido}}</td>
-        
-        <td>
-          <a
-            class="btn btn-warning"
-            routerLink="/libros-editar/{{ libro.idLibro }}"
-          >editar<i class="fa-solid fa-pen"></i></a>
-          <a
-            class="btn btn-danger"
-            (click)="borrarLibro(libro.idLibro, idControl)" 
-            role="button"
-          >eliminar</a>
-        </td>
-      </tr>
-    </tbody>
-    
-  </table>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Título</th>
+          <th>Año</th>
+          <th>Autor</th>
+          <th>Editorial</th>
+          <th>Materia</th>
+          <th>Nota de Contenido</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let libro of libros; let idControl = index">
+          <td>{{ libro.libTitulo }}</td>
+          <td>{{ libro.libAnio }}</td>
+          <td>{{ libro.autorID }}</td>
+          <td>{{ libro.editorialID }}</td>
+          <td>{{ libro.materiaID }}</td>
+          <td>{{ libro.libNotaDeContenido }}</td>
+          <td>
+            <a class="btn btn-warning btn-sm me-1" [routerLink]="['/libros-editar', libro.idLibro]">
+              <i class="fa-solid fa-pen me-1"></i> Editar
+            </a>
+            <button class="btn btn-danger btn-sm" (click)="borrarLibro(libro.idLibro, idControl)">
+              <i class="fa-solid fa-trash me-1"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

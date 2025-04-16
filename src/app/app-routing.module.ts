@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'autores-editar/:id', component: AutoresEditarComponent},
 
   { path: 'editoriales-listar', component: EditorialesListarComponent },
-  { path: 'autores-cargar', component: EditorialesCargarComponent },
+  { path: 'editoriales-cargar', component: EditorialesCargarComponent },
   { path: 'editoriales-editar/:id', component: EditorialesEditarComponent},
 
 

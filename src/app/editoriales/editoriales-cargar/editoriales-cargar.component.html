@@ -1,1 +1,88 @@
-<p>editoriales-cargar works!</p>
+<div class="container mt-4">
+  <div class="card shadow rounded-4">
+    <div class="card-header bg-primary text-white rounded-top-4">
+      <h3 class="mb-0">Agregar Editorial</h3>
+    </div>
+    <div class="card-body p-4">
+      <form [formGroup]="formularioEditoriales" (ngSubmit)="enviarDatos()">
+
+        <div class="mb-3">
+          <label for="ediNombre" class="form-label">Nombre Editorial:</label>
+          <input
+            id="ediNombre"
+            type="text"
+            class="form-control"
+            formControlName="ediNombre"
+            placeholder="Escribe el nombre de la editorial"
+            [ngClass]="{'is-invalid': hasErrors('ediNombre', 'required')}"
+          />
+          <div class="invalid-feedback" *ngIf="hasErrors('ediNombre', 'required')">
+            Debes ingresar un nombre para la editorial.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="ediDireccion" class="form-label">Dirección:</label>
+          <input
+            id="ediDireccion"
+            type="text"
+            class="form-control"
+            formControlName="ediDireccion"
+            placeholder="Escribe la dirección"
+            [ngClass]="{'is-invalid': hasErrors('ediDireccion', 'required')}"
+          />
+          <div class="invalid-feedback" *ngIf="hasErrors('ediDireccion', 'required')">
+            La dirección no puede estar vacía.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="ediTelefono" class="form-label">Teléfono:</label>
+          <input
+            id="ediTelefono"
+            type="text"
+            class="form-control"
+            formControlName="ediTelefono"
+            placeholder="Ej: 3435-212211"
+            [ngClass]="{'is-invalid': hasErrors('ediTelefono', 'required')}"
+          />
+          <div class="invalid-feedback" *ngIf="hasErrors('ediTelefono', 'required')">
+            Debes ingresar el teléfono de la editorial.
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="ediEmail" class="form-label">Email:</label>
+          <input
+            id="ediEmail"
+            type="email"
+            class="form-control"
+            formControlName="ediEmail"
+            placeholder="ejemplo@correo.com"
+            [ngClass]="{
+              'is-invalid': hasErrors('ediEmail', 'required') || hasErrors('ediEmail', 'email')
+            }"
+          />
+          <div class="invalid-feedback" *ngIf="hasErrors('ediEmail', 'required')">
+            Debes ingresar un email para la editorial.
+          </div>
+          <div class="invalid-feedback" *ngIf="hasErrors('ediEmail', 'email')">
+            Por favor, ingresa una dirección de correo electrónico válida.
+          </div>
+        </div>
+
+        <div *ngIf="alertEnvio" class="alert alert-warning" role="alert">
+          Enviando datos ...
+        </div>
+        <div *ngIf="alertCorrecto" class="alert alert-success" role="alert">
+          Datos guardados correctamente
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <button type="submit" class="btn btn-success px-4">Guardar</button>
+          <button type="button" class="btn btn-secondary px-4" [routerLink]="['/editoriales-listar']">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

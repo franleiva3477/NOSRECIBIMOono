@@ -34,11 +34,11 @@ export class EditorialesService {
 
   
   BorrarEditorial(id:any){
-    return this.clienteHttp.delete(`http://localhost/prueba/api/editoriales.php?idEditorial=${id}`);
+    return this.clienteHttp.delete(`http://localhost/NOSRECIBIMOono/api/editoriales.php?idEditorial=${id}`);
   }
   
   ObtenerEditorial(id:any):Observable<any>{
-    return this.clienteHttp.get(`http://localhost/prueba/api/editoriales.php?idEditorial=${id}`);
+    return this.clienteHttp.get(`http://localhost/NOSRECIBIMOono/api/editoriales.php?idEditorial=${id}`);
   }  
 
 
