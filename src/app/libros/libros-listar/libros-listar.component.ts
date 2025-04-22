@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LibrosListarComponent {
   libros: any[]=[];
+  listadoautores: any[]=[];
   
 
   constructor(
@@ -35,7 +36,7 @@ export class LibrosListarComponent {
       if (window.confirm('¿Desea borrar el registro?')) {
         this.servicioLibros.borrarlibro(idLibro).subscribe((respuesta) => {
           this.libros.splice(idControl, 1);
-          this.routeador.navigateByUrl('/biblioteca/libros-listado');
+          this.routeador.navigateByUrl('/biblioteca/libros-listar');
           ; 
   
           window.location.href = window.location.href;

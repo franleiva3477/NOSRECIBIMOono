@@ -41,17 +41,17 @@
       </div>
         
         <div class="mb-3">
-          <label [ngClass]="{'is-invalid': hasErrors('MateriaID', 'required')}" for="" class="form-label">Materia</label>
-          <select formControlName="MateriaID" class="form-control" id="editorial">
+          <label [ngClass]="{'is-invalid': hasErrors('materiaID', 'required')}" for="" class="form-label">Materia</label>
+          <select formControlName="materiaID" class="form-control" id="materiaID">
             <option *ngFor="let materia of listadoMaterias" [value]="materia.idMateria">{{ materia.matNombre }}</option>
           </select>
-          <div class="text-danger" *ngIf="hasErrors('libTitulo', 'required')">
+          <div class="text-danger" *ngIf="hasErrors('materiaID', 'required')">
             Seleccione la materia del Libro.
           </div>
         </div>
         
         <div class="mb-3">
-          <label  [ngClass]="{'is-invalid': hasErrors('libNotDeaContenido', 'required')}" for="" class="form-label">Contenido</label>
+          <label  [ngClass]="{'is-invalid': hasErrors('libNotaDeContenido', 'required')}" for="" class="form-label">Contenido</label>
   
           <input type="text" class="form-control" formControlName="libNotaDeContenido" placeholder="Escribe la Nota Contenido" />
           <div class="text-danger" *ngIf="hasErrors('libNotaDeContenido', 'required')">

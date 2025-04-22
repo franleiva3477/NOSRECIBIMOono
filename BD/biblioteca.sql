@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-04-2025 a las 15:08:00
+-- Tiempo de generación: 21-04-2025 a las 12:26:20
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -31,8 +31,8 @@ CREATE TABLE `autores` (
   `idAutor` int(11) NOT NULL,
   `autNombre` varchar(100) DEFAULT NULL,
   `autApellido` varchar(100) DEFAULT NULL,
-  `autFechaNac` varchar(30) DEFAULT NULL,
-  `autFechaDes` varchar(30) DEFAULT NULL,
+  `autFechaNac` date DEFAULT NULL,
+  `autFechaDes` date DEFAULT NULL,
   `autBiografia` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -41,7 +41,7 @@ CREATE TABLE `autores` (
 --
 
 INSERT INTO `autores` (`idAutor`, `autNombre`, `autApellido`, `autFechaNac`, `autFechaDes`, `autBiografia`) VALUES
-(1, 'bernardo', 'bernardini', '17/09/1990', '18/09/1990', 'vio a boca jugar y le dio un paro\r\n');
+(1, 'bernardo', 'bernardini', '2011-11-08', '2011-11-09', 'vio a boca jugar y le dio un paro\r\n');
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,8 @@ CREATE TABLE `editoriales` (
 
 INSERT INTO `editoriales` (`idEditorial`, `ediNombre`, `ediDireccion`, `ediTelefono`, `ediEmail`) VALUES
 (1, 'editorial animal', 'feliz123', '3435418540', 'editorial1@gmail.com'),
-(2, 'peso pluma', 'calle123', '3435418543', 'editorial2@gmail.com');
+(2, 'peso pluma', 'calle123', '3435418543', 'editorial2@gmail.com'),
+(5, 'editorial cumpal', 'hospitalllllll', '34352221221211', 'hospial@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -86,9 +87,10 @@ CREATE TABLE `libros` (
 --
 
 INSERT INTO `libros` (`idLibro`, `libTitulo`, `libAnio`, `libNotaDeContenido`, `editorialID`, `materiaID`, `autorID`) VALUES
-(1, 'el mundo de reves', '1999', 'libros de ciencias', 1, 1, 1),
 (2, 'el principito', '1920', 'sombrero elefante', 2, 1, 1),
-(3, 'el sombrerero', '1920', 'alicia', 2, 2, 2);
+(3, '099999 años de soledad', '1167', 'Novela de realismo mágico', 1, 2, 1),
+(4, '09 años de soledad', '1967', 'Novela de realismo mágico', 1, 1, 1),
+(9, 'eweweq', '1212', '121dwsdsd', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -218,13 +220,13 @@ ALTER TABLE `autores`
 -- AUTO_INCREMENT de la tabla `editoriales`
 --
 ALTER TABLE `editoriales`
-  MODIFY `idEditorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idEditorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `libros`
 --
 ALTER TABLE `libros`
-  MODIFY `idLibro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idLibro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `materias`

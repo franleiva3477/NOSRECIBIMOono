@@ -66,8 +66,8 @@ export class LibrosEditarComponent implements OnInit {
       libAnio: ['', [Validators.required]],
       EditorialID: ['', [Validators.required]],
       autorID: ['', [Validators.required]],
-      MateriaID: ['', [Validators.required]],
-      libNotDeaContenido: ['', [Validators.required]]
+      materiaID: ['', [Validators.required]],
+      libNotaDeContenido: ['', [Validators.required]]
     });
 
     
@@ -78,8 +78,8 @@ export class LibrosEditarComponent implements OnInit {
         libAnio: respuesta[0]['libAnio'],
         EditorialID: respuesta[0]['EditorialID'],
         autorID: respuesta[0]['autorID'],
-        MateriaID: respuesta[0]['MateriaID'],
-        libNotDeaContenido: respuesta[0]['libNotDeaContenido']
+        materiaID: respuesta[0]['materiaID'],
+        libNotaDeContenido: respuesta[0]['libNotaDeContenido']
       });
     });
   }

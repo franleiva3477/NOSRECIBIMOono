@@ -33,7 +33,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 function handleGetRequest($pdo) {
     // Si se proporciona el parámetro 'idLibro', busca por ID con INNER JOIN
     if (isset($_GET['idLibro'])) {
-        $sql = $pdo->prepare("SELECT idLibro,libTitulo,libAnio, autorID, EditorialID,MateriaID,libNotaDeContenido FROM `Libros` where idLibro = :idLibro"); 
+        $sql = $pdo->prepare("SELECT idLibro,libTitulo,libAnio, autorID, EditorialID,materiaID,libNotaDeContenido FROM `Libros` where idLibro = :idLibro"); 
         $sql->bindValue(':idLibro', $_GET['idLibro']);
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -50,7 +50,7 @@ function handleGetRequest($pdo) {
                    m.matNombre AS materia
             FROM Libros l
             INNER JOIN Editorial e ON l.EditorialID = e.idEditorial
-            INNER JOIN Materia m ON l.MateriaID = m.idMateria
+            INNER JOIN Materias m ON l.materiaID = m.idMateria
             WHERE LOWER(l.libTitulo) LIKE :libTitulo
         ");
         $sql->bindValue(':libTitulo', '%' . $libTitulo . '%', PDO::PARAM_STR);
@@ -76,15 +76,15 @@ function handlePostRequest($pdo) {
     
     // Verifica si se proporcionan los campos necesarios
     if (isset($data->libTitulo) && isset($data->libAnio)  && isset($data->EditorialID)  && isset($data->autorID) 
-    && isset($data->autorID) && isset($data->MateriaID) && isset($data->libNotaDeContenido)) {
+    && isset($data->autorID) && isset($data->materiaID) && isset($data->libNotaDeContenido)) {
         $sql = "INSERT INTO LIBROS (libTitulo, libAnio ,EditorialID,  autorID, MateriaID, libNotaDeContenido) 
-                VALUES (:libTitulo, :libAnio,  :EditorialID,  :autorID,  :MateriaID, :libNotaDeContenido)";
+                VALUES (:libTitulo, :libAnio,  :EditorialID,  :autorID,  :materiaID, :libNotaDeContenido)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':libTitulo', $data->libTitulo);
         $stmt->bindParam(':libAnio', $data->libAnio);
         $stmt->bindParam(':EditorialID', $data->EditorialID);
         $stmt->bindParam(':autorID', $data->autorID);
-        $stmt->bindParam(':MateriaID', $data->MateriaID);
+        $stmt->bindParam(':materiaID', $data->MateriaID);
         $stmt->bindParam(':libNotaDeContenido', $data->libNotaDeContenido);
 
         if ($stmt->execute()) {
@@ -108,17 +108,17 @@ function handlePostRequest($pdo) {
         $idLibro = $_GET['idLibro'] ?? null;
     
         // Verifica si se proporciona 'idLibro' y otros campos necesarios
-        if ($idLibro && isset($data->libTitulo) && isset($data->libAnio)  && isset($data->EditorialID) && isset($data->MateriaID) && isset($data->libNotaDeContenido)) {
+        if ($idLibro && isset($data->libTitulo) && isset($data->libAnio)  && isset($data->EditorialID) && isset($data->materiaID) && isset($data->libNotaDeContenido)) {
             $sql = "UPDATE Libros 
                     SET libTitulo = :libTitulo, libAnio = :libAnio,
-                        EditorialID = :EditorialID,  autorID = :autorID, MateriaID = :MateriaID, libNotaDeContenido = :libNotaDeContenido 
+                        EditorialID = :EditorialID,  autorID = :autorID, materiaID = :materiaID, libNotaDeContenido = :libNotaDeContenido 
                     WHERE idLibro = :idLibro";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':libTitulo', $data->libTitulo);
             $stmt->bindParam(':libAnio', $data->libAnio);
             $stmt->bindParam(':EditorialID', $data->EditorialID);
             $stmt->bindParam(':autorID', $data->autorID);
-            $stmt->bindParam(':MateriaID', $data->MateriaID);
+            $stmt->bindParam(':materiaID', $data->materiaID);
             $stmt->bindParam(':libNotaDeContenido', $data->libNotaDeContenido);
             $stmt->bindParam(':idLibro', $idLibro);
     

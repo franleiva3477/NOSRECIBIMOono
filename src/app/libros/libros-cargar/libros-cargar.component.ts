@@ -36,9 +36,8 @@ export class LibrosCargarComponent implements OnInit{
       libTitulo: ['', [Validators.required, Validators.minLength(4)]],
       libAnio: ['', [Validators.required,Validators.minLength(4)]], 
       EditorialID: ['', [Validators.required]],
-      libCantidad: ['', [Validators.required]],
       autorID: ['', [Validators.required]],
-      MateriaID: ['', [Validators.required]],
+      materiaID: ['', [Validators.required]],
       libNotaDeContenido: ['', [Validators.required]]
     })
    }

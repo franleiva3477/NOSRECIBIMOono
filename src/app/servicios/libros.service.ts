@@ -6,11 +6,10 @@ export interface Libro{
   idLibro?: string;
   libTitulo: string;
   libCantidad: string;
-  libNotaContenido: string;
   libAnio: string;
-  sigtopografica: string;
   editorial: string;
-
+  materiaID: string;
+  libNotaContenido: string;
 }
 
 @Injectable({
