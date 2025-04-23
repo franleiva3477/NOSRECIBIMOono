@@ -30,10 +30,10 @@
           <td>{{ libro.libNotaDeContenido }}</td>
           <td>
             <a class="btn btn-warning btn-sm me-1" [routerLink]="['/libros-editar', libro.idLibro]">
-              <i class="fa-solid fa-pen me-1"></i> Editar
+              Editar
             </a>
             <button class="btn btn-danger btn-sm" (click)="borrarLibro(libro.idLibro, idControl)">
-              <i class="fa-solid fa-trash me-1"></i> Eliminar
+               Eliminar
             </button>
           </td>
         </tr>

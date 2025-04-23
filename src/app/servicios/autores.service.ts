@@ -8,9 +8,9 @@ export interface Autor {
   idAutor?: number; // Asegúrate de que el nombre coincida con el de tu base de datos
   autNombre: string;
   autApellido: string;
-  autFecNac: string;
+  autFechaNac: string;
   autBiografia: string;
-  autFecDes: string;
+  autFechaDes: string;
   
 }
 

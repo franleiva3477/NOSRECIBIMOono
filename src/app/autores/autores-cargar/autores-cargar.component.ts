@@ -12,9 +12,9 @@ export class AutoresCargarComponent implements OnInit {
   autor: Autor = {
     autNombre: '',
     autApellido: '',
-    autFecNac: '', // ISO format 'YYYY-MM-DD'
+    autFechaNac: '', // ISO format 'YYYY-MM-DD'
     autBiografia: '',
-    autFecDes: ''
+    autFechaDes: ''
   };
 
   constructor(

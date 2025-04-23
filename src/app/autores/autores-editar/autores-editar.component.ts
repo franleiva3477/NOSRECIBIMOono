@@ -21,9 +21,9 @@ export class AutoresEditarComponent implements OnInit {
     this.formAutor = this.formulario.group({
       autNombre: [''],
       autApellido: [''],
-      autFecNac: [''],
+      autFechaNac: [''],
       autBio: [''],
-      autFecDes: ['']
+      autFechaDes: ['']
     });
   }
 
@@ -38,9 +38,9 @@ export class AutoresEditarComponent implements OnInit {
         this.formAutor.patchValue({
           autNombre: autor.autNombre,
           autApellido: autor.autApellido,
-          autFecNac: autor.autFecNac,
+          autFechaNac: autor.autFechaNac,
           autBio: autor.autBiografia, // Asegúrate de que esto coincida
-          autFecDes: autor.autFecDes
+          autFechaDes: autor.autFechaDes
         });
         console.log('Formulario actualizado con los datos del autor:', this.formAutor.value); // Verifica los valores del formulario
       }
@@ -53,9 +53,9 @@ export class AutoresEditarComponent implements OnInit {
       idAutor: this.elID,
       autNombre: this.formAutor.get('autNombre')?.value,
       autApellido: this.formAutor.get('autApellido')?.value,
-      autFecNac: this.formAutor.get('autFecNac')?.value,
+      autFechaNac: this.formAutor.get('autFechaNac')?.value,
       autBiografia: this.formAutor.get('autBio')?.value,
-      autFecDes: this.formAutor.get('autFecDes')?.value
+      autFechaDes: this.formAutor.get('autFechaDes')?.value
     };
 
     console.log('Datos del autor a actualizar:', autorActualizado); // Verifica los datos que se van a enviar

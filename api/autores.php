@@ -88,14 +88,14 @@ function handlePostRequest($pdo) {
     $data = json_decode(file_get_contents("php://input"));
     // Verifica si se proporciona 'rolNombre'
     if (isset($data->autNombre)) {
-        $sql = "INSERT INTO Autores (autNombre,autApellido,autFecNac,autBiografia,autFecDes) VALUES ((:autNombre), (:autApellido),(:autFecNac),(:autBiografia),(:autFecDes))";
+        $sql = "INSERT INTO Autores (autNombre,autApellido,autFechaNac,autBiografia,autFechaDes) VALUES ((:autNombre), (:autApellido),(:autFechaNac),(:autBiografia),(:autFechaDes))";
         //$sql = "INSERT INTO Autores (autNombre) VALUES (:autNombre)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':autNombre', $data->autNombre);
         $stmt->bindParam(':autApellido', $data->autApellido);
-        $stmt->bindParam(':autFecNac', $data->autFecNac);
+        $stmt->bindParam(':autFechaNac', $data->autFechaNac);
         $stmt->bindParam(':autBiografia', $data->autBiografia);
-        $stmt->bindParam(':autFecDes', $data->autFecDes);
+        $stmt->bindParam(':autFechaDes', $data->autFechaDes);
 
         if ($stmt->execute()) {
             $idPost = $pdo->lastInsertId();
@@ -123,13 +123,13 @@ function handlePutRequest($pdo) {
     $data = json_decode(file_get_contents("php://input"));
     // Verifica si se proporcionan 'idAutor' y 'autNombre'
     if (isset($data->idAutor) && isset($data->autNombre)) {
-        $sql = "UPDATE Autores SET autNombre = (:autNombre), autApellido = (:autApellido), autFecNac = (:autFecNac), autBiografia = (:autBiografia), autFecDes = (:autFecDes) WHERE idAutor = (:idAutor)";
+        $sql = "UPDATE Autores SET autNombre = (:autNombre), autApellido = (:autApellido), autFechaNac = (:autFechaNac), autBiografia = (:autBiografia), autFechaDes = (:autFechaDes) WHERE idAutor = (:idAutor)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':autNombre', $data->autNombre);
         $stmt->bindParam(':autApellido', $data->autApellido);
-        $stmt->bindParam(':autFecNac', $data->autFecNac);
+        $stmt->bindParam(':autFechaNac', $data->autFechaNac);
         $stmt->bindParam(':autBiografia', $data->autBiografia);
-        $stmt->bindParam(':autFecDes', $data->autFecDes);
+        $stmt->bindParam(':autFechaDes', $data->autFechaDes);
         $stmt->bindParam(':idAutor', $data->idAutor);
         if ($stmt->execute()) {
             header("HTTP/1.1 200 OK");
