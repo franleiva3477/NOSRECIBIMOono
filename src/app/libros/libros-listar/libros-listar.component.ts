@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LibrosListarComponent {
   libros: any[]=[];
-  listadoautores: any[]=[];
+ 
   
 
   constructor(

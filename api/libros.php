@@ -75,7 +75,7 @@ function handlePostRequest($pdo) {
     $data = json_decode(file_get_contents("php://input"));
     
     // Verifica si se proporcionan los campos necesarios
-    if (isset($data->libTitulo) && isset($data->libAnio)  && isset($data->EditorialID)  && isset($data->autorID) 
+    if (isset($data->libTitulo) && isset($data->libAnio)  && isset($data->EditorialID)  
     && isset($data->autorID) && isset($data->materiaID) && isset($data->libNotaDeContenido)) {
         $sql = "INSERT INTO LIBROS (libTitulo, libAnio ,EditorialID,  autorID, MateriaID, libNotaDeContenido) 
                 VALUES (:libTitulo, :libAnio,  :EditorialID,  :autorID,  :materiaID, :libNotaDeContenido)";

@@ -24,7 +24,7 @@
         <tr *ngFor="let libro of libros; let idControl = index">
           <td>{{ libro.libTitulo }}</td>
           <td>{{ libro.libAnio }}</td>
-          <td>{{ libro.autorID }}</td>
+            <td>{{ libro.autNombre + ' ' + libro.autApellido }}</td>
           <td>{{ libro.editorialID }}</td>
           <td>{{ libro.materiaID }}</td>
           <td>{{ libro.libNotaDeContenido }}</td>
