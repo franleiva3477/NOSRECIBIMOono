@@ -19,6 +19,8 @@ import { EditorialesListarComponent } from './editoriales/editoriales-listar/edi
 import { EditorialesEditarComponent } from './editoriales/editoriales-editar/editoriales-editar.component';
 import { EditorialesCargarComponent } from './editoriales/editoriales-cargar/editoriales-cargar.component';
 import { LoginComponent } from './login/login.component';
+import { DashProfComponent } from './dash/dash-prof/dash-prof.component';
+import { DashEstudiantesComponent } from './dash/dash-estudiantes/dash-estudiantes.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { LoginComponent } from './login/login.component';
     EditorialesListarComponent,
     EditorialesEditarComponent,
     EditorialesCargarComponent,
-    LoginComponent
+    LoginComponent,
+    DashProfComponent,
+    DashEstudiantesComponent
   ],
   imports: [
     BrowserModule,

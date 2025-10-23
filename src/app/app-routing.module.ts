@@ -11,14 +11,20 @@ import { EditorialesListarComponent } from './editoriales/editoriales-listar/edi
 import { EditorialesCargarComponent } from './editoriales/editoriales-cargar/editoriales-cargar.component';
 import { EditorialesEditarComponent } from './editoriales/editoriales-editar/editoriales-editar.component';
 import { LoginComponent } from './login/login.component';
+import { DashProfComponent } from './dash/dash-prof/dash-prof.component';
+import { DashEstudiantesComponent } from './dash/dash-estudiantes/dash-estudiantes.component';
+
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dash', pathMatch: 'full' },  // Ruta por defecto
+  { path: '', redirectTo: '/login', pathMatch: 'full' },  // Ruta por defecto
   { path: 'libros-listar', component: LibrosListarComponent },
   { path: 'libros-cargar', component: LibrosCargarComponent},
   { path: 'libros-editar/:id', component: LibrosEditarComponent},
+
   { path: 'dash', component: DashComponent },
+  { path: 'dash-prof', component: DashProfComponent },
+  { path: 'dash-estudiantes', component: DashEstudiantesComponent },
 
   { path: 'autores-listar', component: AutoresListarComponent },
   { path: 'autores-cargar', component: AutoresCargarComponent},

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  email = '';
+  Dni = '';
   contrasena = '';
   error = '';
 
@@ -15,7 +15,7 @@ export class LoginComponent {
 
   login() {
     const datos = {
-      email: this.email,
+      Dni: this.Dni,
       contrasena: this.contrasena
     };
 

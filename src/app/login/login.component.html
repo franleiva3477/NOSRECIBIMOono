@@ -1,30 +1,47 @@
-<div class="container mt-5" style="max-width: 400px;">
-    <h2 class="text-center">Iniciar Sesión</h2>
-    <form (ngSubmit)="login()">
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          [(ngModel)]="email"
-          name="email"
-          required
-        />
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow-lg border-0" style="width: 400px;">
+    <div class="card-body">
+      <h3 class="text-center text-primary mb-4">Iniciar Sesión</h3>
+
+      <form (ngSubmit)="login()">
+        <div class="mb-3">
+          <label for="Dni" class="form-label">Dni</label>
+          <input
+            type="Dni"
+            id="Dni"
+            class="form-control"
+            [(ngModel)]="Dni"
+            name="Dni"
+            placeholder="44444444"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="contrasena" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            id="contrasena"
+            class="form-control"
+            [(ngModel)]="contrasena"
+            name="contrasena"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+
+        <p *ngIf="error" class="text-danger mt-3 text-center">{{ error }}</p>
+      </form>
+
+      <hr />
+
+      <div class="text-center">
+        <button class="btn btn-outline-secondary btn-sm" routerLink="/registro">
+          Registrarme
+        </button>
       </div>
-      <div class="mb-3">
-        <label for="contrasena" class="form-label">Contraseña</label>
-        <input
-          type="password"
-          class="form-control"
-          id="contrasena"
-          [(ngModel)]="contrasena"
-          name="contrasena"
-          required
-        />
-      </div>
-      <button type="submit" class="btn btn-primary w-100">Entrar</button>
-    </form>
-    <p *ngIf="error" class="text-danger mt-3">{{ error }}</p>
+    </div>
   </div>
-  
+</div>
