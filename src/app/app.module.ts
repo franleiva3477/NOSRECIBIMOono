@@ -21,6 +21,7 @@ import { EditorialesCargarComponent } from './editoriales/editoriales-cargar/edi
 import { LoginComponent } from './login/login.component';
 import { DashProfComponent } from './dash/dash-prof/dash-prof.component';
 import { DashEstudiantesComponent } from './dash/dash-estudiantes/dash-estudiantes.component';
+import { PersonasComponent } from './personas/personas.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DashEstudiantesComponent } from './dash/dash-estudiantes/dash-estudiant
     EditorialesCargarComponent,
     LoginComponent,
     DashProfComponent,
-    DashEstudiantesComponent
+    DashEstudiantesComponent,
+    PersonasComponent
   ],
   imports: [
     BrowserModule,

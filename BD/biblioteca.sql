@@ -1,11 +1,9 @@
-create database biblioteca;
-use biblioteca;
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2025 a las 12:26:20
+-- Tiempo de generación: 24-10-2025 a las 16:20:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,7 +41,7 @@ CREATE TABLE `autores` (
 --
 
 INSERT INTO `autores` (`idAutor`, `autNombre`, `autApellido`, `autFechaNac`, `autFechaDes`, `autBiografia`) VALUES
-(1, 'bernardo', 'bernardini', '2011-11-08', '2011-11-09', 'vio a boca jugar y le dio un paro\r\n');
+(1, 'bernardo', 'bernardiniii', '2011-11-08', '2011-11-09', 'vio a boca jugar y le dio un paro\r\n');
 
 -- --------------------------------------------------------
 
@@ -89,10 +87,10 @@ CREATE TABLE `libros` (
 --
 
 INSERT INTO `libros` (`idLibro`, `libTitulo`, `libAnio`, `libNotaDeContenido`, `editorialID`, `materiaID`, `autorID`) VALUES
-(2, 'el principito', '1920', 'sombrero elefante', 2, 1, 1),
+(2, 'el principitonsjfnsfnsfa', '1920', 'sombrero elefante', 2, 1, 1),
 (3, '099999 años de soledad', '1167', 'Novela de realismo mágico', 1, 2, 1),
 (4, '09 años de soledad', '1967', 'Novela de realismo mágico', 1, 1, 1),
-(9, 'eweweq', '1212', '121dwsdsd', 1, 1, 1);
+(9, 'eweweq', '1212', 'no contiene  muchho', 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -127,6 +125,16 @@ CREATE TABLE `personas` (
   `perContrasena` varchar(255) DEFAULT NULL,
   `rolID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `personas`
+--
+
+INSERT INTO `personas` (`idPersona`, `perNombre`, `perApellido`, `perDni`, `perContrasena`, `rolID`) VALUES
+(1, 'franco', 'colapinto', '41999999', 'hsanblas', 1),
+(2, 'franco', 'manstantuono', '41999999', 'hsanblas', 2),
+(3, 'juan', 'riquelme', '41999999', 'hsanblas', 1),
+(4, 'elpibe', 'janson', '41999999', 'hsanblas', 1);
 
 -- --------------------------------------------------------
 
@@ -240,7 +248,7 @@ ALTER TABLE `materias`
 -- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
-  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `prestamos`

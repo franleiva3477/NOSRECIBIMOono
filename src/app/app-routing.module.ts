@@ -13,6 +13,7 @@ import { EditorialesEditarComponent } from './editoriales/editoriales-editar/edi
 import { LoginComponent } from './login/login.component';
 import { DashProfComponent } from './dash/dash-prof/dash-prof.component';
 import { DashEstudiantesComponent } from './dash/dash-estudiantes/dash-estudiantes.component';
+import { PersonasComponent } from './personas/personas.component';
 
 
 
@@ -36,6 +37,7 @@ const routes: Routes = [
 
 
   { path: 'login', component: LoginComponent},
+  {path: 'personas', component:PersonasComponent},
 
 
 

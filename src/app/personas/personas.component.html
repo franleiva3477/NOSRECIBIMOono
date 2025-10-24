@@ -1,0 +1,32 @@
+
+<div class="container mt-4 editoriales-listar-container">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 id="editoriales-grid-label" class="mb-0">Lista de Estudiantes</h2>
+   
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Dni</th>
+          
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let personas of personasFiltradas; let iControl = index">
+          <td>{{ personas.perNombre }}</td>
+          <td>{{ personas.perApellido }}</td>
+          <td>{{ personas.perDni }}</td>
+          
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
