@@ -23,13 +23,12 @@ export class PersonasComponent implements OnInit {
   }
 
   cargarPersonas() {
-    this.personasService.getPersona().subscribe((data: Personas[]) => {
-  // Mostrar solo los estudiantes
-  this.Personas = data.filter(p => p.rolID === 1);
-  this.personasFiltradas = this.Personas;
-});
+  this.personasService.getPersonas().subscribe((data: Personas[]) => {
+    this.Personas = data.filter(p => p.rolID === 1);
+    this.personasFiltradas = this.Personas;
+  });
+}
 
-  }
 
   filtrarPersonas() {
     this.page = 0;

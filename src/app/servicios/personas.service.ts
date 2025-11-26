@@ -18,15 +18,21 @@ export interface Personas {
 export class PersonasService {
 
   private API = 'http://localhost/NOSRECIBIMOono/api/personas.php'; 
+  
   constructor(private http: HttpClient) {}
 
+  // LISTAR TODAS LAS PERSONAS
+  getPersonas(): Observable<Personas[]> {
+    return this.http.get<Personas[]>(this.API);
+  }
+
+  // OBTENER UNA PERSONA POR ID
   getPersona(idPersona: string): Observable<Personas> {
-  return this.http.get<Personas>(`${this.API}?idPersona=${idPersona}`);
-}
+    return this.http.get<Personas>(`${this.API}?idPersona=${idPersona}`);
+  }
 
-
+  // ACTUALIZAR PERSONA
   updatePersona(persona: any) {
-  return this.http.put(`${this.API}`, persona);
-}
-
+    return this.http.put(this.API, persona);
+  }
 }
