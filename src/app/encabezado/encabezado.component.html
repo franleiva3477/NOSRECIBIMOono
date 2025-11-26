@@ -1,16 +1,17 @@
-<header class="app-header">
+<header class="app-header" *ngIf="mostrarEncabezado">
   <div class="logo">
     <a href="#" class="logo">
       <img src="assets/img/logo.png.png" alt="Logo">
     </a>
   </div>
 
-  <div class="app-title">
-    <a routerLink="/dash-prof" class="biblioteca-link">Biblioteca</a>
-  </div>
+  <div class="app-title" (click)="irAlInicio()" style="cursor: pointer;">
+  <span class="biblioteca-link">Biblioteca</span>
+</div>
 
-  <div class="login-button">
-    <button routerLink="/login" class="btn btn-outline-light">Iniciar Sesión</button>
-  </div>
+
+  <nav class="navbar navbar-light bg-light justify-content-between px-4 shadow-sm">
+    <h4 class="text-primary mb-0">Bienvenido, {{ usuario?.perNombre }} {{usuario?.perApellido}}</h4>
+    <button class="btn btn-outline-danger btn-sm" (click)="logout()">Cerrar sesión</button>
+  </nav>
 </header>
-  

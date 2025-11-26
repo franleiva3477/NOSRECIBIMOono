@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   Dni = '';
@@ -19,16 +20,29 @@ export class LoginComponent {
       contrasena: this.contrasena
     };
 
-    this.http.post<any>('http://localhost/api/login.php', datos).subscribe({
+    this.http.post<any>('http://localhost/NOSRECIBIMOono/api/login.php', datos).subscribe({
       next: (respuesta) => {
-        if (respuesta.token) {
+        if (respuesta.success) {
+          // Guardamos los datos en localStorage
           localStorage.setItem('token', respuesta.token);
-          this.router.navigate(['/inicio']); // redirige a tu ruta protegida
+          localStorage.setItem('rol', respuesta.rol);
+          localStorage.setItem('usuario', JSON.stringify(respuesta.usuario));
+
+          // 🔹 Redirigir según el rol
+          if (respuesta.rol === 'bibliotecario') {
+            this.router.navigate(['/dash-prof']); // dashboard de profesor
+          } else if (respuesta.rol === 'estudiante') {
+            this.router.navigate(['/dash-estudiantes']); // dashboard de estudiante
+          } else {
+            this.error = 'Rol desconocido. Contacte al administrador.';
+          }
+        } else {
+          this.error = respuesta.mensaje;
         }
       },
       error: (err) => {
-        this.error = 'Usuario o contraseña incorrectos.';
         console.error(err);
+        this.error = 'Error al conectar con el servidor.';
       }
     });
   }

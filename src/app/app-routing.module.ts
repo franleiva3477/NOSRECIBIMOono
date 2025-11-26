@@ -14,18 +14,27 @@ import { LoginComponent } from './login/login.component';
 import { DashProfComponent } from './dash/dash-prof/dash-prof.component';
 import { DashEstudiantesComponent } from './dash/dash-estudiantes/dash-estudiantes.component';
 import { PersonasComponent } from './personas/personas.component';
+import { PersonasEditarComponent } from './personas-editar/personas-editar.component';
+import { RegistroComponent } from './registro/registro.component';
+import { EncabezadoComponent } from './encabezado/encabezado.component';
+import { AuthGuard } from './guards/auth.guard';
+import { PrestamosLibrosComponent } from './prestamos-libros/prestamos-libros.component';
+
+
+
 
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },  // Ruta por defecto
+  { path: '', redirectTo: '/', pathMatch: 'full' }, 
+  { path: 'libros-listar', component: LibrosListarComponent },
   { path: 'libros-listar', component: LibrosListarComponent },
   { path: 'libros-cargar', component: LibrosCargarComponent},
-  { path: 'libros-editar/:id', component: LibrosEditarComponent},
+  { path: 'encabezado', component: EncabezadoComponent},
 
   { path: 'dash', component: DashComponent },
-  { path: 'dash-prof', component: DashProfComponent },
-  { path: 'dash-estudiantes', component: DashEstudiantesComponent },
+    { path: 'dash-prof', component: DashProfComponent, canActivate: [AuthGuard], data: { rol: 'bibliotecario' } },
+  { path: 'dash-estudiantes', component: DashEstudiantesComponent, canActivate: [AuthGuard], data: { rol: 'estudiante' } },
 
   { path: 'autores-listar', component: AutoresListarComponent },
   { path: 'autores-cargar', component: AutoresCargarComponent},
@@ -38,7 +47,11 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent},
   {path: 'personas', component:PersonasComponent},
+  { path: 'personas-editar/:id', component: PersonasEditarComponent, canActivate: [AuthGuard] },
 
+  {path: 'registro', component:RegistroComponent},
+
+  {path: 'prestamos', component:PrestamosLibrosComponent},
 
 
 

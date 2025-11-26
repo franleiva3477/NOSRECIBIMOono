@@ -22,6 +22,9 @@ import { LoginComponent } from './login/login.component';
 import { DashProfComponent } from './dash/dash-prof/dash-prof.component';
 import { DashEstudiantesComponent } from './dash/dash-estudiantes/dash-estudiantes.component';
 import { PersonasComponent } from './personas/personas.component';
+import { RegistroComponent } from './registro/registro.component';
+import { PrestamosLibrosComponent } from './prestamos-libros/prestamos-libros.component';
+import { PersonasEditarComponent } from './personas-editar/personas-editar.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { PersonasComponent } from './personas/personas.component';
     LoginComponent,
     DashProfComponent,
     DashEstudiantesComponent,
-    PersonasComponent
+    PersonasComponent,
+    RegistroComponent,
+    PrestamosLibrosComponent,
+    PersonasEditarComponent
   ],
   imports: [
     BrowserModule,

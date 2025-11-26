@@ -2,28 +2,31 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 export interface Personas {
-  idPersona: string;
-  perNombre:string;
+  idPersona: number;
+  perNombre: string;
   perApellido: string;
   perDni: string;
-  perContrasena: string;
-  rolID: string;
+  perContrasena?: string;
+  rolID?: number;
+  rolNombre?: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonasService {
-  private api = 'http://localhost/NOSRECIBIMOono/api/personas.php';
 
-  constructor(private clienteHttp: HttpClient) {}
+  private API = 'http://localhost/NOSRECIBIMOono/api/personas.php'; 
+  constructor(private http: HttpClient) {}
 
-  ObtenerPersonas(): Observable<Personas[]> {
-    return this.clienteHttp.get<Personas[]>(this.api);
-  }
-  ObtenerPersona(id:any):Observable<any>{
-    return this.clienteHttp.get(`http://localhost/NOSRECIBIMOono/api/personas.php?idPersonas=${id}`);
-  }  
+  getPersona(idPersona: string): Observable<Personas> {
+  return this.http.get<Personas>(`${this.API}?idPersona=${idPersona}`);
+}
+
+
+  updatePersona(persona: any) {
+  return this.http.put(`${this.API}`, persona);
+}
+
 }

@@ -5,9 +5,9 @@
 
       <form (ngSubmit)="login()">
         <div class="mb-3">
-          <label for="Dni" class="form-label">Dni</label>
+          <label for="Dni" class="form-label">DNI</label>
           <input
-            type="Dni"
+            type="text"
             id="Dni"
             class="form-control"
             [(ngModel)]="Dni"
@@ -30,7 +30,7 @@
           />
         </div>
 
-        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+        <button type="submit" class="btn btn-primary w-100" >Entrar</button>
 
         <p *ngIf="error" class="text-danger mt-3 text-center">{{ error }}</p>
       </form>

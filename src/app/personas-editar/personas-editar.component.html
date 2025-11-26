@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <h2>Editar Perfil</h2>
+
+  <form (ngSubmit)="guardar()">
+
+    <label>Nombre:</label>
+    <input class="form-control" [(ngModel)]="persona.perNombre" name="perNombre">
+
+    <label class="mt-3">Apellido:</label>
+    <input class="form-control" [(ngModel)]="persona.perApellido" name="perApellido">
+
+    <label class="mt-3">Nueva Contraseña:</label>
+    <input class="form-control" [(ngModel)]="persona.perContrasena" name="perContrasena">
+
+    <button class="btn btn-primary mt-4" type="submit">
+      Guardar Cambios
+    </button>
+  </form>
+</div>
