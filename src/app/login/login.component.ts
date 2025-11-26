@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
   Dni = '';
   contrasena = '';
   error = '';
@@ -21,27 +22,29 @@ export class LoginComponent {
     };
 
     this.http.post<any>('http://localhost/NOSRECIBIMOono/api/login.php', datos).subscribe({
-      next: (respuesta) => {
-        if (respuesta.success) {
-          // Guardamos los datos en localStorage
-          localStorage.setItem('token', respuesta.token);
-          localStorage.setItem('rol', respuesta.rol);
-          localStorage.setItem('usuario', JSON.stringify(respuesta.usuario));
+      next: (resp) => {
 
-          // 🔹 Redirigir según el rol
-          if (respuesta.rol === 'bibliotecario') {
-            this.router.navigate(['/dash-prof']); // dashboard de profesor
-          } else if (respuesta.rol === 'estudiante') {
-            this.router.navigate(['/dash-estudiantes']); // dashboard de estudiante
-          } else {
-            this.error = 'Rol desconocido. Contacte al administrador.';
-          }
-        } else {
-          this.error = respuesta.mensaje;
+        if (!resp.success) {
+          this.error = resp.mensaje;
+          return;
         }
+
+        localStorage.setItem('token', resp.token);
+        localStorage.setItem('rol', resp.rol);
+        localStorage.setItem('usuario', JSON.stringify(resp.usuario));
+
+        if (resp.rol === 'bibliotecario') {
+          this.router.navigate(['/dash-prof']);
+        } 
+        else if (resp.rol === 'estudiante') {
+          this.router.navigate(['/dash-estudiantes']);
+        } 
+        else {
+          this.error = 'Rol desconocido.';
+        }
+
       },
-      error: (err) => {
-        console.error(err);
+      error: () => {
         this.error = 'Error al conectar con el servidor.';
       }
     });

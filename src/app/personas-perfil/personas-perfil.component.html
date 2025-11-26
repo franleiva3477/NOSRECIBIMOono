@@ -1,0 +1,29 @@
+<div class="perfil-container" *ngIf="!cargando">
+  <h2>Mi Perfil</h2>
+
+  <div class="campo">
+    <label>Nombre</label>
+    <input [(ngModel)]="usuario.perNombre" />
+  </div>
+
+  <div class="campo">
+    <label>Apellido</label>
+    <input [(ngModel)]="usuario.perApellido" />
+  </div>
+
+  <div class="campo">
+    <label>DNI</label>
+    <input [value]="usuario.perDni" disabled />
+  </div>
+
+  <div class="campo">
+    <label>Contraseña</label>
+    <input type="password" [(ngModel)]="usuario.perContrasena" />
+  </div>
+
+  <button (click)="guardarCambios()">Guardar cambios</button>
+</div>
+
+<div *ngIf="cargando">
+  Cargando perfil...
+</div>

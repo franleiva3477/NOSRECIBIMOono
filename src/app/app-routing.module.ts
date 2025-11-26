@@ -19,6 +19,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PrestamosLibrosComponent } from './prestamos-libros/prestamos-libros.component';
+import { PersonasPerfilComponent } from './personas-perfil/personas-perfil.component';
 
 
 
@@ -48,6 +49,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   {path: 'personas', component:PersonasComponent},
   { path: 'personas-editar/:id', component: PersonasEditarComponent, canActivate: [AuthGuard] },
+  {
+  path: 'perfil',component: PersonasPerfilComponent,canActivate: [AuthGuard],data: { rol: 'estudiante' } },
 
   {path: 'registro', component:RegistroComponent},
 

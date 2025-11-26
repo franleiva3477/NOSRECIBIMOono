@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost/NOSRECIBIMOono/api/login.php'; // ajustá la URL
+  private API = 'http://localhost/NOSRECIBIMOono/api/login.php'; // ajustá la URL
 
   constructor(private http: HttpClient) { }
 
   login(perDni: string, perContrasena: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { perDni, perContrasena });
+    return this.http.post<any>(this.API, { perDni, perContrasena });
   }
 
   // Guardar usuario en localStorage (para mantener sesión)

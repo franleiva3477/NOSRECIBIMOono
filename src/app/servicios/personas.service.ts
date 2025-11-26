@@ -16,17 +16,24 @@ export interface Personas {
   providedIn: 'root'
 })
 export class PersonasService {
+  [x: string]: any;
 
-  private API = 'http://localhost/NOSRECIBIMOono/api/personas.php'; 
-  constructor(private http: HttpClient) {}
+  private API = 'http://localhost/NOSRECIBIMOono/api/personas.php';
 
-  getPersona(idPersona: string): Observable<Personas> {
-  return this.http.get<Personas>(`${this.API}?idPersona=${idPersona}`);
-}
+  constructor(private clienteHttp: HttpClient) {}
 
+  getPersonas(): Observable<Personas[]> {
+    return this.clienteHttp.get<Personas[]>(this.API);
+  }
 
-  updatePersona(persona: any) {
-  return this.http.put(`${this.API}`, persona);
-}
+  getPersona(idPersona: number): Observable<Personas> {
+    return this.clienteHttp.get<Personas>(`${this.API}?idPersona=${idPersona}`);
+  }
 
+  updatePersona(persona: Personas) {
+    return this.clienteHttp.put(this.API, persona);
+  }
+  borrarpersona(idPersona: any): Observable<any> {
+    return this.clienteHttp.delete(`${this.API}?idPersona=${idPersona}`);
+  }
 }

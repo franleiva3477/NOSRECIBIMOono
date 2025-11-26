@@ -18,27 +18,27 @@ export interface Autor {
   providedIn: 'root'
 })
 export class AutoresService {
-  private apiUrl = 'http://localhost/NOSRECIBIMOono/api/autores.php';
+  private API = 'http://localhost/NOSRECIBIMOono/api/autores.php';
  
   constructor(private http: HttpClient) { }
 
   getAutor(): Observable<Autor[]> {
-    return this.http.get<Autor[]>(this.apiUrl);
+    return this.http.get<Autor[]>(this.API);
   }
 
   getAutorById(id: number): Observable<Autor[]> {
-    return this.http.get<Autor[]>(`${this.apiUrl}?idAutor=${id}`);
+    return this.http.get<Autor[]>(`${this.API}?idAutor=${id}`);
   }  
   
   addAutor(Autor: Autor): Observable<number> {
-    return this.http.post<number>(this.apiUrl, Autor);
+    return this.http.post<number>(this.API, Autor);
   }
 
   editAutor(Autor: Autor): Observable<any> {
-    return this.http.put<any>(this.apiUrl, Autor);
+    return this.http.put<any>(this.API, Autor);
 }
 
   delAutor(idAutor: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}?idAutor=${idAutor}`);
+    return this.http.delete<any>(`${this.API}?idAutor=${idAutor}`);
   }
 }

@@ -11,11 +11,11 @@ export interface Materias {
   providedIn: 'root'
 })
 export class MateriasService {
-  private api = 'http://localhost/NOSRECIBIMOono/api/materias.php';
+  private API = 'http://localhost/NOSRECIBIMOono/api/materias.php';
 
   constructor(private clienteHttp: HttpClient) {}
 
   ObtenerMaterias(): Observable<Materias[]> {
-    return this.clienteHttp.get<Materias[]>(this.api);
+    return this.clienteHttp.get<Materias[]>(this.API);
   }
 }

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./personas.component.css']
 })
 export class PersonasComponent implements OnInit {
+[x: string]: any;
 
   searchForm = new FormControl('');
   Personas: Personas[] = [];
@@ -16,20 +17,21 @@ export class PersonasComponent implements OnInit {
   CantidadPersonas: number = 0;
   public page: number = 0;
 
-  constructor(private personasService: PersonasService, private router: Router) {}
+  constructor(
+    private personasService: PersonasService,
+     private router: Router) {}
 
   ngOnInit(): void {
     this.cargarPersonas();
   }
 
   cargarPersonas() {
-    this.personasService.getPersona().subscribe((data: Personas[]) => {
-  // Mostrar solo los estudiantes
-  this.Personas = data.filter(p => p.rolID === 1);
-  this.personasFiltradas = this.Personas;
-});
+  this.personasService.getPersonas().subscribe((data: Personas[]) => {
+    this.Personas = data.filter(p => p.rolID === 1);
+    this.personasFiltradas = this.Personas;
+  });
+}
 
-  }
 
   filtrarPersonas() {
     this.page = 0;
@@ -44,4 +46,19 @@ export class PersonasComponent implements OnInit {
       );
     }
   }
+
+  borrarPersona(idPersona: any, idControl: any) {
+      console.log(idPersona);
+      console.log(idControl);
+  
+      if (window.confirm('¿Desea borrar el registro?')) {
+        this.personasService.borrarpersona(idPersona).subscribe((respuesta) => {
+          this.Personas.splice(idControl, 1);
+          this.router.navigateByUrl('/personas');
+          ; 
+  
+          window.location.href = window.location.href;
+        });
+      }
+    }
 }
