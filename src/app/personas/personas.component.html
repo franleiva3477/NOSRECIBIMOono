@@ -22,7 +22,7 @@
         <tr *ngFor="let personas of personasFiltradas; let idControl = index">
           <td>{{ personas.perNombre }}</td>
           <td>{{ personas.perApellido }}</td>
-          <td>{{ personas.perDni }}</td>
+          <td>{{ personas.perDni }}</td>   
           <td>
            
            <button class="btn btn-danger btn-sm" (click)="borrarPersona(personas.idPersona, idControl)" >
