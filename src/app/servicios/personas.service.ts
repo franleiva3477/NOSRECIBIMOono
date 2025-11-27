@@ -18,6 +18,7 @@ export interface Personas {
 export class PersonasService {
   [x: string]: any;
 
+<<<<<<< HEAD
   private API = 'http://localhost/NOSRECIBIMOono/api/personas.php';
 
   constructor(private clienteHttp: HttpClient) {}
@@ -35,5 +36,24 @@ export class PersonasService {
   }
   borrarpersona(idPersona: any): Observable<any> {
     return this.clienteHttp.delete(`${this.API}?idPersona=${idPersona}`);
+=======
+  private API = 'http://localhost/NOSRECIBIMOono/api/personas.php'; 
+  
+  constructor(private http: HttpClient) {}
+
+  // LISTAR TODAS LAS PERSONAS
+  getPersonas(): Observable<Personas[]> {
+    return this.http.get<Personas[]>(this.API);
+  }
+
+  // OBTENER UNA PERSONA POR ID
+  getPersona(idPersona: string): Observable<Personas> {
+    return this.http.get<Personas>(`${this.API}?idPersona=${idPersona}`);
+  }
+
+  // ACTUALIZAR PERSONA
+  updatePersona(persona: any) {
+    return this.http.put(this.API, persona);
+>>>>>>> 2913bb3743260adfe5d8c1542453edde61d8141e
   }
 }

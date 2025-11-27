@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="perfil-container" *ngIf="!cargando">
   <h2>Mi Perfil</h2>
 
@@ -26,4 +27,41 @@
 
 <div *ngIf="cargando">
   Cargando perfil...
+=======
+<div class="container mt-4">
+
+  <h2 class="mb-4 text-center">Mi Perfil</h2>
+
+  <div class="card shadow">
+    <div class="card-body">
+
+      <div class="row mb-3">
+        <div class="col-6"><strong>Nombre:</strong></div>
+        <div class="col-6">{{ estudiante?.perNombre }}</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-6"><strong>Apellido:</strong></div>
+        <div class="col-6">{{ estudiante?.perApellido }}</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-6"><strong>DNI:</strong></div>
+        <div class="col-6">{{ estudiante?.perDni }}</div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-primary me-2">
+          Editar Perfil
+        </button>
+
+        <button class="btn btn-warning">
+          Cambiar Contraseña
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+>>>>>>> 2913bb3743260adfe5d8c1542453edde61d8141e
 </div>

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class PersonasPerfilComponent implements OnInit {
 
+<<<<<<< HEAD
   usuario: Personas = {
     idPersona: 0,
     perNombre: '',
@@ -20,6 +21,10 @@ export class PersonasPerfilComponent implements OnInit {
   };
 
   cargando = true;
+=======
+  estudiante!: Personas;
+  dniUsuario: string | null = null;
+>>>>>>> 2913bb3743260adfe5d8c1542453edde61d8141e
 
   constructor(
     private personasService: PersonasService,
@@ -27,6 +32,7 @@ export class PersonasPerfilComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+<<<<<<< HEAD
     this.validarAcceso();     // valida que sea estudiante
     this.cargarPerfil();      // carga datos del usuario
   }
@@ -72,6 +78,31 @@ export class PersonasPerfilComponent implements OnInit {
 }
 
 
+=======
+    this.dniUsuario = localStorage.getItem('dni'); // Se guarda en el login
+
+    if (!this.dniUsuario) {
+      console.error("DNI no encontrado en localStorage");
+      return;
+    }
+
+    this.cargarDatosEstudiante();
+  }
+
+  cargarDatosEstudiante() {
+    this.personasService.getPersonas().subscribe((data: Personas[]) => {
+
+      const usuario = data.find(p => p.perDni === this.dniUsuario);
+
+      if (usuario) {
+        this.estudiante = usuario;
+      } else {
+        console.error("No se encontró el estudiante");
+      }
+
+    });
+  }
+>>>>>>> 2913bb3743260adfe5d8c1542453edde61d8141e
 
   // editarPerfil() {
   //   this.router.navigate(['/personas-editar', this.estudiante.idPersona]);
@@ -81,4 +112,8 @@ export class PersonasPerfilComponent implements OnInit {
   //   this.router.navigate(['/persona-password', this.estudiante.idPersona]);
   // }
 
+<<<<<<< HEAD
 
+=======
+}
+>>>>>>> 2913bb3743260adfe5d8c1542453edde61d8141e
