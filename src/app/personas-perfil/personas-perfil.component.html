@@ -1,67 +1,59 @@
-<<<<<<< HEAD
-<div class="perfil-container" *ngIf="!cargando">
-  <h2>Mi Perfil</h2>
+<div class="container mt-4" *ngIf="!cargando">
 
-  <div class="campo">
-    <label>Nombre</label>
-    <input [(ngModel)]="usuario.perNombre" />
-  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
 
-  <div class="campo">
-    <label>Apellido</label>
-    <input [(ngModel)]="usuario.perApellido" />
-  </div>
+      <div class="card shadow-sm">
+        <div class="card-header text-center bg-primary text-white">
+          <h4 class="mb-0">Mi Perfil</h4>
+        </div>
 
-  <div class="campo">
-    <label>DNI</label>
-    <input [value]="usuario.perDni" disabled />
-  </div>
+        <div class="card-body">
 
-  <div class="campo">
-    <label>Contraseña</label>
-    <input type="password" [(ngModel)]="usuario.perContrasena" />
-  </div>
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" [(ngModel)]="usuario.perNombre">
+          </div>
 
-  <button (click)="guardarCambios()">Guardar cambios</button>
-</div>
+          <div class="mb-3">
+            <label class="form-label">Apellido</label>
+            <input type="text" class="form-control" [(ngModel)]="usuario.perApellido">
+          </div>
 
-<div *ngIf="cargando">
-  Cargando perfil...
-=======
-<div class="container mt-4">
+          <div class="mb-3">
+            <label class="form-label">DNI</label>
+            <input type="text" class="form-control" [value]="usuario.perDni" disabled>
+          </div>
 
-  <h2 class="mb-4 text-center">Mi Perfil</h2>
+          <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input 
+              [type]="mostrarPass ? 'text' : 'password'" 
+              class="form-control"
+              [(ngModel)]="usuario.perContrasena">
+          </div>
 
-  <div class="card shadow">
-    <div class="card-body">
+          <!-- Checkbox -->
+          <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" id="verPass" [(ngModel)]="mostrarPass">
+            <label class="form-check-label" for="verPass">
+              Mostrar contraseña
+            </label>
+          </div>
 
-      <div class="row mb-3">
-        <div class="col-6"><strong>Nombre:</strong></div>
-        <div class="col-6">{{ estudiante?.perNombre }}</div>
-      </div>
+          <button class="btn btn-primary w-100" (click)="guardarCambios()">
+            Guardar cambios
+          </button>
 
-      <div class="row mb-3">
-        <div class="col-6"><strong>Apellido:</strong></div>
-        <div class="col-6">{{ estudiante?.perApellido }}</div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-6"><strong>DNI:</strong></div>
-        <div class="col-6">{{ estudiante?.perDni }}</div>
-      </div>
-
-      <div class="text-center">
-        <button class="btn btn-primary me-2">
-          Editar Perfil
-        </button>
-
-        <button class="btn btn-warning">
-          Cambiar Contraseña
-        </button>
+        </div>
       </div>
 
     </div>
   </div>
 
->>>>>>> 2913bb3743260adfe5d8c1542453edde61d8141e
+</div>
+
+<div *ngIf="cargando" class="text-center mt-5">
+  <div class="spinner-border text-primary"></div>
+  <p class="mt-3">Cargando perfil...</p>
 </div>

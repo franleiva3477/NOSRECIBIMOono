@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./personas-perfil.component.css']
 })
 export class PersonasPerfilComponent implements OnInit {
+  [x: string]: any;
 
-<<<<<<< HEAD
+
   usuario: Personas = {
     idPersona: 0,
     perNombre: '',
@@ -21,10 +22,8 @@ export class PersonasPerfilComponent implements OnInit {
   };
 
   cargando = true;
-=======
-  estudiante!: Personas;
-  dniUsuario: string | null = null;
->>>>>>> 2913bb3743260adfe5d8c1542453edde61d8141e
+  mostrarPass = false;
+
 
   constructor(
     private personasService: PersonasService,
@@ -32,7 +31,7 @@ export class PersonasPerfilComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-<<<<<<< HEAD
+
     this.validarAcceso();     // valida que sea estudiante
     this.cargarPerfil();      // carga datos del usuario
   }
@@ -58,6 +57,8 @@ export class PersonasPerfilComponent implements OnInit {
       next: (data) => {
         this.usuario = data;
         this.cargando = false;
+       
+
       },
       error: () => {
         alert("Error cargando el perfil");
@@ -66,43 +67,27 @@ export class PersonasPerfilComponent implements OnInit {
   }
 
   guardarCambios() {
-    this.personasService.updatePersona(this.usuario).subscribe({
-      next: () => {
-        alert("Datos actualizados correctamente");
-      },
-      error: () => {
-        alert("Error al guardar los cambios");
-      }
-    });
-  }
+  this.personasService.updatePersona(this.usuario).subscribe({
+    next: () => {
+      alert("Datos actualizados correctamente");
+
+      //  ACTUALIZA localStorage para que la app muestre los datos nuevos
+      localStorage.setItem('usuario', JSON.stringify(this.usuario));
+
+      //  Recarga la página para mostrar la info actualizada
+     
+      this.router.navigateByUrl('/dash-estudiantes');
+
+    },
+    error: () => {
+      alert("Error al guardar los cambios");
+    }
+  });
+}
+
 }
 
 
-=======
-    this.dniUsuario = localStorage.getItem('dni'); // Se guarda en el login
-
-    if (!this.dniUsuario) {
-      console.error("DNI no encontrado en localStorage");
-      return;
-    }
-
-    this.cargarDatosEstudiante();
-  }
-
-  cargarDatosEstudiante() {
-    this.personasService.getPersonas().subscribe((data: Personas[]) => {
-
-      const usuario = data.find(p => p.perDni === this.dniUsuario);
-
-      if (usuario) {
-        this.estudiante = usuario;
-      } else {
-        console.error("No se encontró el estudiante");
-      }
-
-    });
-  }
->>>>>>> 2913bb3743260adfe5d8c1542453edde61d8141e
 
   // editarPerfil() {
   //   this.router.navigate(['/personas-editar', this.estudiante.idPersona]);
@@ -112,8 +97,4 @@ export class PersonasPerfilComponent implements OnInit {
   //   this.router.navigate(['/persona-password', this.estudiante.idPersona]);
   // }
 
-<<<<<<< HEAD
 
-=======
-}
->>>>>>> 2913bb3743260adfe5d8c1542453edde61d8141e

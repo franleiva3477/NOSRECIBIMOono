@@ -2,7 +2,7 @@
 
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="mb-0">Lista de Libros</h2>
-    <a routerLink="/libros-cargar" class="btn btn-primary">
+    <a  *ngIf="esProf()" routerLink="/libros-cargar" class="btn btn-primary">
       Agregar Libro
     </a>
   </div>
@@ -17,7 +17,7 @@
           <th>Editorial</th>
           <th>Materia</th>
           <th>Nota de Contenido</th>
-          <th>Acciones</th>
+          <th *ngIf="esProf()" >Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -28,11 +28,11 @@
           <td>{{ libro.editorialID }}</td>
           <td>{{ libro.materiaID }}</td>
           <td>{{ libro.libNotaDeContenido }}</td>
-          <td>
-            <a class="btn btn-warning btn-sm me-1" [routerLink]="['/libros-editar', libro.idLibro]">
+          <td *ngIf="esProf()">
+            <a  class="btn btn-warning btn-sm me-1" [routerLink]="['/libros-editar', libro.idLibro]">
               Editar
             </a>
-            <button class="btn btn-danger btn-sm" (click)="borrarLibro(libro.idLibro, idControl)">
+            <button  class="btn btn-danger btn-sm" (click)="borrarLibro(libro.idLibro, idControl)">
                Eliminar
             </button>
           </td>

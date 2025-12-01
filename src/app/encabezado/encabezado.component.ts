@@ -22,15 +22,22 @@ export class EncabezadoComponent implements OnInit {
         this.mostrarEncabezado = !['/login', '/registro'].includes(event.url);
 
         // antualio los datos del usuario si existen y lo muestra en el encabezado
+      const token = localStorage.getItem('token');
         const datos = localStorage.getItem('usuario');
-        this.usuario = datos ? JSON.parse(datos) : null;
+
+        if (!token || !datos) {
+          this.usuario = null;
+        } else {
+          this.usuario = JSON.parse(datos);
+        }
       });
   }
 // hago que recargue el encabezado y vuelva al login
   logout(): void {
+     this.router.navigate(['/login']);
     localStorage.clear();
     this.usuario = null;
-    this.router.navigate(['/login']);
+   
   }
   // y aca que cada vez qye toque otro lugar vuelva al inicio segun rl rol
   irAlInicio() {

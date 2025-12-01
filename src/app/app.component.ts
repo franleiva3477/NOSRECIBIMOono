@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'prueba';
+  title = 'VAMOBOKE';
+
+
+  ngOnInit() {
+ 
+  localStorage.removeItem('token');
+  localStorage.removeItem('rol');
+  localStorage.removeItem('usuario');
+}
 }

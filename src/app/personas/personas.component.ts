@@ -20,8 +20,16 @@ export class PersonasComponent implements OnInit {
   constructor(
     private personasService: PersonasService,
      private router: Router) {}
+     rol: string | null = '';
 
   ngOnInit(): void {
+    
+     this.rol = localStorage.getItem('rol');
+
+  if (this.rol !== 'bibliotecario') {
+    this.router.navigate(['/dash-estudiantes']);
+    return;
+  }
     this.cargarPersonas();
   }
 

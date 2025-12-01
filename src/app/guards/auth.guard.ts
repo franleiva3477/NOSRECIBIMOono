@@ -12,16 +12,24 @@ export class AuthGuard implements CanActivate {
     const token = localStorage.getItem('token');
     const rol = localStorage.getItem('rol');
 
-    // Si no hay token => sesión no iniciada
+    // Si no hay token no tiene sesion activa
     if (!token) {
       this.router.navigate(['/login']);
       return false;
     }
 
-    // Si la ruta tiene restricción de rol, validarla
+    
     const rolPermitido = route.data['rol'] as string;
     if (rolPermitido && rol !== rolPermitido) {
-      this.router.navigate(['/login']);
+      
+      if (rol === 'estudiante') {
+        this.router.navigate(['/dash-estudiantes']);
+      } else if (rol === 'bibliotecario') {
+        this.router.navigate(['/dash-prof']);
+      } else {
+        this.router.navigate(['/login']);
+      }
+
       return false;
     }
 

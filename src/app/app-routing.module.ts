@@ -27,10 +27,10 @@ import { PersonasPerfilComponent } from './personas-perfil/personas-perfil.compo
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' }, 
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, 
   { path: 'libros-listar', component: LibrosListarComponent },
-  { path: 'libros-listar', component: LibrosListarComponent },
-  { path: 'libros-cargar', component: LibrosCargarComponent},
+  { path: 'libros-editar/:id', component: LibrosEditarComponent ,canActivate: [AuthGuard],data: { rol: 'bibliotecario' }},
+  { path: 'libros-cargar', component: LibrosCargarComponent ,canActivate: [AuthGuard],data: { rol: 'bibliotecario' }},
   { path: 'encabezado', component: EncabezadoComponent},
 
   { path: 'dash', component: DashComponent },
@@ -41,18 +41,18 @@ const routes: Routes = [
   { path: 'autores-cargar', component: AutoresCargarComponent},
   { path: 'autores-editar/:id', component: AutoresEditarComponent},
 
-  { path: 'editoriales-listar', component: EditorialesListarComponent },
-  { path: 'editoriales-cargar', component: EditorialesCargarComponent },
-  { path: 'editoriales-editar/:id', component: EditorialesEditarComponent},
+  { path: 'editoriales-listar', component: EditorialesListarComponent ,canActivate: [AuthGuard],data: { rol: 'bibliotecario' } },
+  { path: 'editoriales-cargar', component: EditorialesCargarComponent ,canActivate: [AuthGuard],data: { rol: 'bibliotecario' }},
+  { path: 'editoriales-editar/:id', component: EditorialesEditarComponent,canActivate: [AuthGuard],data: { rol: 'bibliotecario' } },
 
-
+  {path: 'registro', component:RegistroComponent},
   { path: 'login', component: LoginComponent},
-  {path: 'personas', component:PersonasComponent},
-  { path: 'personas-editar/:id', component: PersonasEditarComponent, canActivate: [AuthGuard] },
+  {path: 'personas', component:PersonasComponent ,canActivate: [AuthGuard],data: { rol: 'bibliotecario' } },
+  { path: 'personas-editar/:id', component: PersonasEditarComponent,canActivate: [AuthGuard],data: { rol: 'bibliotecario' }},
   {
   path: 'perfil',component: PersonasPerfilComponent,canActivate: [AuthGuard],data: { rol: 'estudiante' } },
 
-  {path: 'registro', component:RegistroComponent},
+  
 
   {path: 'prestamos', component:PrestamosLibrosComponent},
 

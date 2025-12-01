@@ -43,6 +43,9 @@ export class LibrosListarComponent {
         });
       }
     }
+    esProf() {
+  return localStorage.getItem('rol') === 'bibliotecario';
+}
 
 
 }
