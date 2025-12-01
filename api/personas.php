@@ -28,9 +28,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
 }
 
-/* =======================================================
-   GET: Obtener personas
-   ======================================================= */
+//get
 function handleGetRequest($pdo) {
     if (isset($_GET['idPersona'])) {
         $sql = $pdo->prepare("
@@ -73,9 +71,7 @@ function handleGetRequest($pdo) {
     exit;
 }
 
-/* =======================================================
-   POST: Crear una persona
-   ======================================================= */
+//post
 function handlePostRequest($pdo) {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -108,9 +104,7 @@ function handlePostRequest($pdo) {
     exit;
 }
 
-/* =======================================================
-   PUT: Editar persona (SOLO nombre, apellido, contraseña)
-   ======================================================= */
+//put
 function handlePutRequest($pdo) {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -144,9 +138,7 @@ function handlePutRequest($pdo) {
     exit;
 }
 
-/* =======================================================
-   DELETE: Eliminar persona
-   ======================================================= */
+//eliminar
 function handleDeleteRequest($pdo) {
     if (!isset($_GET['idPersona'])) {
         echo json_encode(['error' => 'Falta idPersona']);

@@ -7,12 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'VAMOBOKE';
+  logueado: any;
 
 
   ngOnInit() {
  
-  localStorage.removeItem('token');
-  localStorage.removeItem('rol');
-  localStorage.removeItem('usuario');
+ // this.logueado = !!localStorage.getItem('token');
+
 }
 }

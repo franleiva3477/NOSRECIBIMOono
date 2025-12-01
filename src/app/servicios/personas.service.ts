@@ -33,6 +33,9 @@ export class PersonasService {
   updatePersona(persona: Personas) {
     return this.clienteHttp.put(this.API, persona);
   }
+  registrarPersona(datos: any): Observable<any> {
+    return this.clienteHttp.post(this.API, datos); // acá se llama la API
+  }
   borrarpersona(idPersona: any): Observable<any> {
     return this.clienteHttp.delete(`${this.API}?idPersona=${idPersona}`);
   }
