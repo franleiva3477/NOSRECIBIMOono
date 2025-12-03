@@ -32,9 +32,9 @@ export class EditorialesCargarComponent {
   ){
 
     this.formularioEditoriales = this.formulario.group({
-      ediNombre:['', [Validators.required]],
+      ediNombre:['', [Validators.required, Validators.minLength(4)]],
       ediDireccion:['', [Validators.required]],
-      ediTelefono:['', [Validators.required]],
+      ediTelefono:['', [Validators.required,Validators.pattern('^[0-9]+$')]],
       ediEmail:['', [Validators.required, Validators.email]]
     });
 

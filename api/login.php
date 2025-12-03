@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $usuario = $sql->fetch(PDO::FETCH_ASSOC);
 
         if ($usuario && $data->contrasena === $usuario['perContrasena']) {
-            // Buscar nombre del rol
+            // Busca EL nombre del rol
             $rolQuery = $pdo->prepare("SELECT rolNombre FROM roles WHERE idRol = :rolID");
             $rolQuery->bindParam(':rolID', $usuario['rolID']);
             $rolQuery->execute();
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 "iss" => "http://localhost",
                 "aud" => "http://localhost",
                 "iat" => time(),
-                "exp" => time() + (60 * 60), // 1 hora
+                "exp" => time() + (60 * 60), 
                 "data" => [
                     "idPersona" => $usuario['idPersona'],
                     "perNombre" => $usuario['perNombre'],

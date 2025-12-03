@@ -34,10 +34,10 @@ export class LibrosCargarComponent implements OnInit{
     
     this.formularioDeLibros=this.formulario.group({
       libTitulo: ['', [Validators.required, Validators.minLength(4)]],
-      libAnio: ['', [Validators.required,Validators.minLength(4)]], 
+      libAnio: ['', [Validators.required,Validators.minLength(4),Validators.pattern('^[0-9]+$')]], 
       EditorialID: ['', [Validators.required]],
       autorID: ['', [Validators.required]],
-      materiaID: ['', [Validators.required]],
+      materiaID: [null, [Validators.required]],
       libNotaDeContenido: ['', [Validators.required]]
     })
    }
@@ -60,8 +60,12 @@ export class LibrosCargarComponent implements OnInit{
  
   }
 
+  hasErrors(controlName: string, errorType: string) {
+    return this.formularioDeLibros.get(controlName)?.hasError(errorType) && this.formularioDeLibros.get(controlName)?.touched;
+    }
+
   cargarLibros(): any {
-    console.log("Formulario enviado:", this.formularioDeLibros.patchValue); 
+    console.log("Formulario enviado:", this.formularioDeLibros.value); 
     this.servicioLibros.agregarLibros(this.formularioDeLibros.value).subscribe(
       (respuesta) => {
         console.log("Libro agregado:", respuesta);

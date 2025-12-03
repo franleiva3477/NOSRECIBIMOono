@@ -2,7 +2,7 @@
 
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="mb-0">Lista de Libros</h2>
-    <a  *ngIf="esProf()" routerLink="/libros-cargar" class="btn btn-primary">
+    <a *ngIf="esProf()" routerLink="/libros-cargar" class="btn btn-primary">
       Agregar Libro
     </a>
   </div>
@@ -17,25 +17,36 @@
           <th>Editorial</th>
           <th>Materia</th>
           <th>Nota de Contenido</th>
-          <th *ngIf="esProf()" >Acciones</th>
+          <th *ngIf="esProf()">Acciones</th>
+          <th *ngIf="!esProf()">Pedir</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let libro of libros; let idControl = index">
           <td>{{ libro.libTitulo }}</td>
           <td>{{ libro.libAnio }}</td>
-            <td>{{ libro.autNombre + ' ' + libro.autApellido }}</td>
-          <td>{{ libro.editorialID }}</td>
-          <td>{{ libro.materiaID }}</td>
+          <td>{{ libro.autNombre + ' ' + libro.autApellido }}</td>
+          <td>{{ libro.editorial }}</td>
+          <td>{{ libro.materia }}</td>
           <td>{{ libro.libNotaDeContenido }}</td>
+
+          
           <td *ngIf="esProf()">
-            <a  class="btn btn-warning btn-sm me-1" [routerLink]="['/libros-editar', libro.idLibro]">
+            <a class="btn btn-warning btn-sm me-1" [routerLink]="['/libros-editar', libro.idLibro]">
               Editar
             </a>
-            <button  class="btn btn-danger btn-sm" (click)="borrarLibro(libro.idLibro, idControl)">
-               Eliminar
+            <button class="btn btn-danger btn-sm" (click)="borrarLibro(libro.idLibro, idControl)">
+              Eliminar
             </button>
           </td>
+
+          
+          <td *ngIf="!esProf()">
+            <button class="btn btn-success btn-sm" (click)="pedirPrestamo(libro.idLibro)">
+              Solicitar prestao
+            </button>
+          </td>
+
         </tr>
       </tbody>
     </table>

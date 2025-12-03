@@ -1,97 +1,90 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: GET,POST");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 
 include 'conexion.php';
 $pdo = new conexion();
 
-if($_SERVER['REQUEST_METHOD']=='GET'){
-    if(isset($_GET['id'])){
-        $sql=$pdo->prepare("SELECT * FROM `Materia` WHERE =:id");
+
+// =========================
+//          GET
+// =========================
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+    // GET POR ID
+    if (isset($_GET['id'])) {
+        $sql = $pdo->prepare("SELECT idMateria, matNombre FROM materias WHERE idMateria = :id");
         $sql->bindValue(':id', $_GET['id']);
         $sql->execute();
-        $sql->setFetchMode(PDO::FETCH_ASSOC);
-        header("HTTP/1.1 200 OK");
-        echo json_encode($sql->fetchAll());
-        exit;
-    }else{
-        $sql=$pdo->prepare("SELECT  matNombre FROM `Materias`");
-        $sql->execute();
-        $sql->setFetchMode(PDO::FETCH_ASSOC);
-        header("HTTP/1.1 200 OK");
-        echo json_encode($sql->fetchAll());
+
+        echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
         exit;
     }
+
+    // GET GENERAL
+    $sql = $pdo->prepare("SELECT idMateria, matNombre FROM materias");
+    $sql->execute();
+    echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
+    exit;
 }
 
 
-elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    try {
-        $data = json_decode(file_get_contents('php://input'), true);
+// =========================
+//          POST
+// =========================
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
 
-        if (!isset($data['matNombre'])) {
-            header("HTTP/1.1 400 Bad Request");
-            echo json_encode(["error" => "Falta el nombre de la materia"]);
-            exit;
-        }
-
-        $sql = $pdo->prepare("INSERT INTO materias (matNombre) VALUES (?)");
-        $sql->execute([$data['matNombre']]);
-
-        header("HTTP/1.1 201 Created");
-        echo json_encode(["message" => "Materia creada exitosamente"]);
-        exit;
-    } catch (PDOException $e) {
-        header("HTTP/1.1 500 Internal Server Error");
-        echo json_encode(["error" => $e->getMessage()]);
+    if (!isset($data['matNombre'])) {
+        http_response_code(400);
+        echo json_encode(["error" => "Falta el nombre de la materia"]);
         exit;
     }
+
+    $sql = $pdo->prepare("INSERT INTO materias (matNombre) VALUES (?)");
+    $sql->execute([$data['matNombre']]);
+
+    http_response_code(201);
+    echo json_encode(["message" => "Materia creada exitosamente"]);
+    exit;
 }
 
-elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {
-    try {
-        $data = json_decode(file_get_contents('php://input'), true);
 
-        if (!isset($data['id']) || !isset($data['matNombre'])) {
-            header("HTTP/1.1 400 Bad Request");
-            echo json_encode(["error" => "Faltan parámetros"]);
-            exit;
-        }
+// =========================
+//          PUT
+// =========================
+if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    $data = json_decode(file_get_contents('php://input'), true);
 
-        $sql = $pdo->prepare("UPDATE materias SET matNombre = ? WHERE idMateria = ?");
-        $sql->execute([$data['matNombre'], $data['id']]);
-
-        header("HTTP/1.1 200 OK");
-        echo json_encode(["message" => "Materia actualizada exitosamente"]);
-        exit;
-    } catch (PDOException $e) {
-        header("HTTP/1.1 500 Internal Server Error");
-        echo json_encode(["error" => $e->getMessage()]);
+    if (!isset($data['id']) || !isset($data['matNombre'])) {
+        http_response_code(400);
+        echo json_encode(["error" => "Faltan parámetros"]);
         exit;
     }
+
+    $sql = $pdo->prepare("UPDATE materias SET matNombre = ? WHERE idMateria = ?");
+    $sql->execute([$data['matNombre'], $data['id']]);
+
+    echo json_encode(["message" => "Materia actualizada correctamente"]);
+    exit;
 }
 
-elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-    try {
-        if (!isset($_GET['id'])) {
-            header("HTTP/1.1 400 Bad Request");
-            echo json_encode(["error" => "Falta el parámetro 'id'"]);
-            exit;
-        }
 
-        $sql = $pdo->prepare("DELETE FROM materias WHERE idMateria = ?");
-        $sql->execute([$_GET['id']]);
-
-        header("HTTP/1.1 200 OK");
-        echo json_encode(["message" => "Materia eliminada exitosamente"]);
-        exit;
-    } catch (PDOException $e) {
-        header("HTTP/1.1 500 Internal Server Error");
-        echo json_encode(["error" => $e->getMessage()]);
+// =========================
+//          DELETE
+// =========================
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+    if (!isset($_GET['id'])) {
+        http_response_code(400);
+        echo json_encode(["error" => "Falta el parámetro id"]);
         exit;
     }
+
+    $sql = $pdo->prepare("DELETE FROM materias WHERE idMateria = ?");
+    $sql->execute([$_GET['id']]);
+
+    echo json_encode(["message" => "Materia eliminada correctamente"]);
+    exit;
 }

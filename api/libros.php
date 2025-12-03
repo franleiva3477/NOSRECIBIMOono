@@ -31,45 +31,101 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 // Maneja solicitudes GET - funcionando
 function handleGetRequest($pdo) {
-    // Si se proporciona el parámetro 'idLibro', busca por ID con INNER JOIN
+
+    // --- 1) Buscar por ID ---
     if (isset($_GET['idLibro'])) {
-        $sql = $pdo->prepare("SELECT idLibro,libTitulo,libAnio, autorID, EditorialID,materiaID,libNotaDeContenido FROM `Libros` where idLibro = :idLibro"); 
+
+        $sql = $pdo->prepare("
+            SELECT 
+                l.idLibro,
+                l.libTitulo,
+                l.libAnio,
+                l.libNotaDeContenido,
+
+                a.autNombre,
+                a.autApellido,
+
+                e.ediNombre AS editorial,
+                m.matNombre AS materia
+
+            FROM libros l
+            LEFT JOIN autores a ON l.autorID = a.idAutor
+            LEFT JOIN editoriales e ON l.editorialID = e.idEditorial
+            LEFT JOIN materias m ON l.materiaID = m.idMateria
+
+            WHERE idLibro = :idLibro
+        ");
+
         $sql->bindValue(':idLibro', $_GET['idLibro']);
         $sql->execute();
-        $sql->setFetchMode(PDO::FETCH_ASSOC);
         header("HTTP/1.1 200 OK");
-        echo json_encode($sql->fetchAll());
+        echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
+        exit;
     }
-    // Si se proporciona el parámetro 'libTitulo', busca por título con INNER JOIN
-    elseif (isset($_GET['libTitulo'])) {
-        $libTitulo = strtolower($_GET['libTitulo']);
+
+
+    // --- 2) Buscar por título ---
+    if (isset($_GET['libTitulo'])) {
+
+        $titulo = '%' . strtolower($_GET['libTitulo']) . '%';
+
         $sql = $pdo->prepare("
-            SELECT l.idLibro, l.libTitulo, l.libAnio, l.libNotaDeContenido, 
-                   
-                   e.ediNombre AS editorial, 
-                   m.matNombre AS materia
-            FROM Libros l
-            INNER JOIN Editorial e ON l.EditorialID = e.idEditorial
-            INNER JOIN Materias m ON l.materiaID = m.idMateria
-            WHERE LOWER(l.libTitulo) LIKE :libTitulo
+            SELECT 
+                l.idLibro,
+                l.libTitulo,
+                l.libAnio,
+                l.libNotaDeContenido,
+
+                a.autNombre,
+                a.autApellido,
+
+                e.ediNombre AS editorial,
+                m.matNombre AS materia
+
+            FROM libros l
+            LEFT JOIN autores a ON l.autorID = a.idAutor
+            LEFT JOIN editoriales e ON l.editorialID = e.idEditorial
+            LEFT JOIN materias m ON l.materiaID = m.idMateria
+
+            WHERE LOWER(l.libTitulo) LIKE :titulo
         ");
-        $sql->bindValue(':libTitulo', '%' . $libTitulo . '%', PDO::PARAM_STR);
+
+        $sql->bindValue(':titulo', $titulo);
         $sql->execute();
-        $sql->setFetchMode(PDO::FETCH_ASSOC);
+
         header("HTTP/1.1 200 OK");
-        echo json_encode($sql->fetchAll());
+        echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
+        exit;
     }
-    // Si no se proporciona ningún parámetro, obtiene todos los libros con INNER JOIN
-    else {
-        $sql = $pdo->prepare("
-            SELECT * FROM LIBROS");
-        $sql->execute();
-        $sql->setFetchMode(PDO::FETCH_ASSOC);
-        header("HTTP/1.1 200 OK");
-        echo json_encode($sql->fetchAll());
-    }
+
+
+    // --- 3) Obtener todos los libros con JOIN ---
+    $sql = $pdo->prepare("
+        SELECT 
+            l.idLibro,
+            l.libTitulo,
+            l.libAnio,
+            l.libNotaDeContenido,
+
+            a.autNombre,
+            a.autApellido,
+
+            e.ediNombre AS editorial,
+            m.matNombre AS materia
+
+        FROM libros l
+        LEFT JOIN autores a ON l.autorID = a.idAutor
+        LEFT JOIN editoriales e ON l.editorialID = e.idEditorial
+        LEFT JOIN materias m ON l.materiaID = m.idMateria
+    ");
+
+    $sql->execute();
+
+    header("HTTP/1.1 200 OK");
+    echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
     exit;
 }
+
 
 function handlePostRequest($pdo) {
     $data = json_decode(file_get_contents("php://input"));

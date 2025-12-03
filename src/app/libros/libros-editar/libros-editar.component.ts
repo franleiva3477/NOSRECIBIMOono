@@ -63,7 +63,7 @@ export class LibrosEditarComponent implements OnInit {
     
     this.formularioDeLibros = this.formulario.group({
       libTitulo: ['', [Validators.required]],
-      libAnio: ['', [Validators.required]],
+      libAnio: ['', [Validators.required,Validators.minLength(4),Validators.pattern('^[0-9]+$')]],
       EditorialID: ['', [Validators.required]],
       autorID: ['', [Validators.required]],
       materiaID: ['', [Validators.required]],

@@ -24,18 +24,13 @@ export class PersonasComponent implements OnInit {
 
   ngOnInit(): void {
     
-     this.rol = localStorage.getItem('rol');
-
-  if (this.rol !== 'bibliotecario') {
-    this.router.navigate(['/dash-estudiantes']);
-    return;
-  }
+ 
     this.cargarPersonas();
   }
 
   cargarPersonas() {
   this.personasService.getPersonas().subscribe((data: Personas[]) => {
-    this.Personas = data.filter(p => p.rolID === 1);
+    this.Personas = data.filter(p => p.rolID === 1);//filtra solo los estudiantes
     this.personasFiltradas = this.Personas;
   });
 }

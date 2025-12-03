@@ -32,18 +32,11 @@ export class PersonasPerfilComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.validarAcceso();     // valida que sea estudiante
+    
     this.cargarPerfil();      // carga datos del usuario
   }
 
-  validarAcceso() {
-    const rol = localStorage.getItem('rol');
-
-    if (rol !== 'estudiante') {
-      // si NO es estudiante, lo sacamos del perfil
-      this.router.navigate(['/dash-prof']);
-    }
-  }
+  
 
   cargarPerfil() {
     const user = JSON.parse(localStorage.getItem('usuario')!);

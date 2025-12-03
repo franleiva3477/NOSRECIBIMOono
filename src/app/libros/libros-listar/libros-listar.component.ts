@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Libro, LibrosService } from 'src/app/servicios/libros.service';
 import { Router } from '@angular/router';
+import { PrestamosService } from 'src/app/servicios/prestamos.service';
+
 
 @Component({
   selector: 'app-libros-listar',
@@ -9,13 +11,15 @@ import { Router } from '@angular/router';
 })
 export class LibrosListarComponent {
   libros: any[]=[];
+  editorial:any[]=[];
  
   
 
   constructor(
     private routeador: Router,
 
-    private servicioLibros: LibrosService
+    private servicioLibros: LibrosService,
+    private prestamosService: PrestamosService
 
   ){}
   ngOnInit() {
@@ -47,5 +51,8 @@ export class LibrosListarComponent {
   return localStorage.getItem('rol') === 'bibliotecario';
 }
 
+pedirPrestamo(libro: any) {
+  alert
+}
 
 }

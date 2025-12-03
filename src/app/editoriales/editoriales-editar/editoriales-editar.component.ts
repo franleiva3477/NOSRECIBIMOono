@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { OnInit } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 import { Route, ActivatedRoute, Router } from '@angular/router';
 import { EditorialesService } from 'src/app/servicios/editoriales.service';
 
@@ -55,9 +55,9 @@ export class EditorialesEditarComponent implements OnInit {
 
     this.formularioEditoriales = this.formulario.group({
       idEditorial:[''],
-      ediNombre:['', [Validators.required]],
+      ediNombre:['', [Validators.required, Validators.minLength(4)]],
       ediDireccion:['', [Validators.required]],
-      ediTelefono:['', [Validators.required]],
+      ediTelefono:['', [Validators.required,Validators.pattern('^[0-9]+$')]],
       ediEmail:['', [Validators.required, Validators.email]],
    
     });
