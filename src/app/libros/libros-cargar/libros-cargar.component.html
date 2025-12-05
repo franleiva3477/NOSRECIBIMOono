@@ -1,66 +1,124 @@
 <div class="card mt-4">
-  <div class="card-header">
-    Agregar Libro
-  </div>
+  <div class="card-header">Agregar Libro</div>
+
   <div class="card-body">
+    <form [formGroup]="formularioDeLibros" (ngSubmit)="cargarLibros()">
 
-    <form [formGroup]="formularioDeLibros" (submit)="cargarLibros()">
-
+      <!-- TÍTULO -->
       <div class="mb-3">
         <label for="titulo" class="form-label">Título</label>
-        <input type="text" id="titulo" class="form-control" formControlName="libTitulo" placeholder="Escribe un título" />
+        <input
+          type="text"
+          id="titulo"
+          class="form-control"
+          formControlName="libTitulo"
+          [ngClass]="{'is-invalid': hasErrors('libTitulo', 'required') || hasErrors('libTitulo','minlength')}"
+          placeholder="Escribe un título"
+        />
         <div class="invalid-feedback" *ngIf="hasErrors('libTitulo', 'required')">
-            Debes ingresar Titulo mayor a 4 caracteres.
-          </div>
+          Debes ingresar un título.
+        </div>
+        <div class="invalid-feedback" *ngIf="hasErrors('libTitulo','minlength')">
+          El título debe tener al menos 4 caracteres.
+        </div>
       </div>
 
+      <!-- AÑO -->
       <div class="mb-3">
         <label for="anio" class="form-label">Año</label>
-        <input type="text" id="anio" class="form-control" formControlName="libAnio" placeholder="Ingrese el año" />
-        <div class="invalid-feedback" *ngIf="hasErrors('libAnio', 'required')">
-            Debes ingresar un Año mayor a 4 caracteres.
-          </div>
+        <input
+          type="text"
+          id="anio"
+          class="form-control"
+          formControlName="libAnio"
+          [ngClass]="{'is-invalid': hasErrors('libAnio', 'required') || hasErrors('libAnio','minlength') || hasErrors('libAnio','pattern')}"
+          placeholder="Ingrese el año"
+        />
+        <div class="invalid-feedback" *ngIf="hasErrors('libAnio','required')">
+          Debes ingresar un año.
+        </div>
+        <div class="invalid-feedback" *ngIf="hasErrors('libAnio','pattern')">
+          El año debe contener solo números.
+        </div>
+        <div class="invalid-feedback" *ngIf="hasErrors('libAnio','minlength')">
+          El año debe tener al menos 4 dígitos.
+        </div>
       </div>
 
+      <!-- EDITORIAL -->
       <div class="mb-3">
         <label for="editorial" class="form-label">Editorial</label>
-        <select formControlName="EditorialID" class="form-control" id="editorial">
-          <option *ngFor="let editorial of editoriales" [value]="editorial.idEditorial">{{ editorial.ediNombre }}</option>
-          <div class="invalid-feedback" *ngIf="hasErrors('editorial', 'required')">
-            Debes seleccionar una editorial.
-          </div>
+        <select
+          formControlName="EditorialID"
+          id="editorial"
+          class="form-control"
+          [ngClass]="{'is-invalid': hasErrors('EditorialID', 'required')}"
+        >
+          <option value="">Seleccione una editorial</option>
+          <option *ngFor="let editorial of editoriales" [value]="editorial.idEditorial">
+            {{ editorial.ediNombre }}
+          </option>
         </select>
+        <div class="invalid-feedback" *ngIf="hasErrors('EditorialID','required')">
+          Debes seleccionar una editorial.
+        </div>
       </div>
 
+      <!-- AUTOR -->
       <div class="mb-3">
         <label for="autor" class="form-label">Autor</label>
-        <select formControlName="autorID" class="form-control" id="autor">
-          <option *ngFor="let autor of listadoautores" [value]="autor.idAutor">{{ autor.autNombre }}</option>
-          <div class="invalid-feedback" *ngIf="hasErrors('autor', 'required')">
-            Debes seleccionar un autor.
-          </div>
+        <select
+          formControlName="autorID"
+          id="autor"
+          class="form-control"
+          [ngClass]="{'is-invalid': hasErrors('autorID','required')}"
+        >
+          <option value="">Seleccione un autor</option>
+          <option *ngFor="let autor of listadoautores" [value]="autor.idAutor">
+            {{ autor.autNombre }} {{ autor.autApellido }}
+          </option>
         </select>
+        <div class="invalid-feedback" *ngIf="hasErrors('autorID','required')">
+          Debes seleccionar un autor.
+        </div>
       </div>
 
+      <!-- MATERIA -->
       <div class="mb-3">
-        <label for="materia" class="form-label">Materia</label>
-        <select formControlName="materiaID" class="form-control" id="materiaID">
-          <option *ngFor="let materia of listadoMaterias" [value]="materia.idMateria">{{ materia.matNombre }}</option>
+        <label for="materiaID" class="form-label">Materia</label>
+        <select
+          formControlName="materiaID"
+          id="materiaID"
+          class="form-control"
+          [ngClass]="{'is-invalid': hasErrors('materiaID','required')}"
+        >
+          <option value="">Seleccione una materia</option>
+          <option *ngFor="let materia of listadoMaterias" [value]="materia.idMateria">
+            {{ materia.matNombre }}
+          </option>
         </select>
-        <div class="invalid-feedback" *ngIf="hasErrors('materia', 'required')">
-            Debes elegir una materia.
-          </div>
+        <div class="invalid-feedback" *ngIf="hasErrors('materiaID','required')">
+          Debes elegir una materia.
+        </div>
       </div>
 
+      <!-- CONTENIDO -->
       <div class="mb-3">
         <label for="contenido" class="form-label">Nota de Contenido</label>
-        <input type="text" id="contenido" class="form-control" formControlName="libNotaDeContenido" placeholder="Escribe la nota de contenido" />
-        <div class="invalid-feedback" *ngIf="hasErrors('libNotaDeContenido', 'required')">
-            Debes ingresar una contenido.
-          </div>
-        
+        <input
+          type="text"
+          id="contenido"
+          class="form-control"
+          formControlName="libNotaDeContenido"
+          [ngClass]="{'is-invalid': hasErrors('libNotaDeContenido','required')}"
+          placeholder="Escribe la nota de contenido"
+        />
+        <div class="invalid-feedback" *ngIf="hasErrors('libNotaDeContenido','required')">
+          Debes ingresar una nota de contenido.
         </div>
+      </div>
 
+      <!-- BOTONES -->
       <div class="btn-group" role="group">
         <button type="submit" class="btn btn-success" [disabled]="formularioDeLibros.invalid">
           Agregar
@@ -71,6 +129,5 @@
       </div>
 
     </form>
-
   </div>
 </div>

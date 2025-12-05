@@ -1,7 +1,3 @@
-
-
-
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,103 +6,70 @@ import { EditorialesService } from 'src/app/servicios/editoriales.service';
 import { MateriasService } from 'src/app/servicios/materias.service';
 import { AutoresService } from 'src/app/servicios/autores.service';
 
-
-
 @Component({
   selector: 'app-libros-editar',
   templateUrl: './libros-editar.component.html',
   styleUrls: ['./libros-editar.component.css']
 })
 export class LibrosEditarComponent implements OnInit {
-  formularioDeLibros: FormGroup;
+
+  formularioDeLibros!: FormGroup;
   idLibro: any;
+
   editoriales: any = [];
-  listadosignaturas:any=[];
   listadoMaterias: any = [];
-  listadoautores: any =[];
+  listadoautores: any = [];
 
   constructor(
-    public formulario: FormBuilder,
-    private activeRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
     private libroService: LibrosService,
     private editorialesService: EditorialesService,
     private materiasService: MateriasService,
     private autoresService: AutoresService,
-    public ruteador: Router
-  ) {
-
-   
-   
-    this.editorialesService.ObtenerEditoriales().subscribe((respuesta) => {
-     console.log(respuesta);
-      this.editoriales= respuesta;
-    });
-    
-    this.materiasService.ObtenerMaterias().subscribe((respuesta)=>{
-      console.log(respuesta);
-      this.listadoMaterias = respuesta;
-    });
-    
-  
-    this.autoresService.getAutor().subscribe((respuesta)=>{
-      console.log(respuesta);
-      this.listadoautores= respuesta;
-    }
-    );
-
-    
-
-
-    // obtiene el ID 
-    this.idLibro = this.activeRoute.snapshot.paramMap.get('id');
-
-    
-    this.formularioDeLibros = this.formulario.group({
-      libTitulo: ['', [Validators.required]],
-      libAnio: ['', [Validators.required,Validators.minLength(4),Validators.pattern('^[0-9]+$')]],
-      EditorialID: ['', [Validators.required]],
-      autorID: ['', [Validators.required]],
-      materiaID: ['', [Validators.required]],
-      libNotaDeContenido: ['', [Validators.required]]
-    });
-
-    
-    this.libroService.obtenerLibro(this.idLibro).subscribe(respuesta => {
-      console.log(respuesta);
-      this.formularioDeLibros.patchValue({
-        libTitulo: respuesta[0]['libTitulo'],
-        libAnio: respuesta[0]['libAnio'],
-        EditorialID: respuesta[0]['EditorialID'],
-        autorID: respuesta[0]['autorID'],
-        materiaID: respuesta[0]['materiaID'],
-        libNotaDeContenido: respuesta[0]['libNotaDeContenido']
-      });
-    });
-  }
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
 
-  }
-  hasErrors(controlName: string, errorType: string) {
-    return this.formularioDeLibros.get(controlName)?.hasError(errorType) && this.formularioDeLibros.get(controlName)?.touched;
-    }
+    this.idLibro = this.route.snapshot.paramMap.get('id');
 
+    this.formularioDeLibros = this.fb.group({
+      libTitulo: ['', Validators.required],
+      libAnio: ['', [Validators.required, Validators.minLength(4), Validators.pattern('^[0-9]+$')]],
+      EditorialID: ['', Validators.required],
+      autorID: ['', Validators.required],
+      materiaID: ['', Validators.required],
+      libNotaDeContenido: ['', Validators.required]
+    });
+
+    // cargar combos
+    this.editorialesService.ObtenerEditoriales().subscribe(r => this.editoriales = r);
+    this.materiasService.ObtenerMaterias().subscribe(r => this.listadoMaterias = r);
+    this.autoresService.getAutor().subscribe(r => this.listadoautores = r);
+
+    // cargar datos del libro
+    this.libroService.obtenerLibro(this.idLibro).subscribe(respuesta => {
+      this.formularioDeLibros.patchValue(respuesta[0]);
+    });
+
+  }
+
+  hasErrors(control: string, error: string) {
+    const c = this.formularioDeLibros.get(control);
+    return c?.hasError(error) && c?.touched;
+  }
 
   actualizarLibro(): void {
-    if (this.formularioDeLibros.valid) {
-      const datosLibro = {
-        ...this.formularioDeLibros.value
-      };
- 
-      this.libroService.actualizarLibro(this.idLibro, datosLibro).subscribe(
-        () => {
-          console.log('Libro actualizado con éxito');
-      
-          this.ruteador.navigateByUrl('/libros-listar');
-        }
-      );
-    } else {
-      console.error('Formulario inválido');
+    if (this.formularioDeLibros.invalid) {
+      this.formularioDeLibros.markAllAsTouched();
+      return;
     }
+
+    this.libroService.actualizarLibro(this.idLibro, this.formularioDeLibros.value)
+      .subscribe(() => {
+        this.router.navigateByUrl('/libros-listar');
+      });
   }
+
 }
