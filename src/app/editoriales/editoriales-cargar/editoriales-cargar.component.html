@@ -79,7 +79,9 @@
         </div>
 
         <div class="d-flex justify-content-end gap-2">
-          <button type="submit" class="btn btn-success px-4">Guardar</button>
+          <button class="btn btn-primary"
+        type="submit"
+        [disabled]="formularioEditoriales.invalid"> Guardar</button>
           <button type="button" class="btn btn-secondary px-4" [routerLink]="['/editoriales-listar']">Cancelar</button>
         </div>
       </form>

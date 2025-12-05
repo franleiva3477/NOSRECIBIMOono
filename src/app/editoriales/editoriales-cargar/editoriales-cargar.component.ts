@@ -34,7 +34,7 @@ export class EditorialesCargarComponent {
     this.formularioEditoriales = this.formulario.group({
       ediNombre:['', [Validators.required, Validators.minLength(4)]],
       ediDireccion:['', [Validators.required]],
-      ediTelefono:['', [Validators.required,Validators.pattern('^[0-9]+$')]],
+      ediTelefono: ['', [Validators.required,Validators.pattern(/^[0-9\s-]+$/), Validators.minLength(7), Validators.maxLength(20)]],
       ediEmail:['', [Validators.required, Validators.email]]
     });
 

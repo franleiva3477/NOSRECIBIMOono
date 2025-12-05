@@ -40,7 +40,7 @@ export class RegistroComponent implements OnInit {
     this.personasService.registrarPersona(this.formularioRegistro.value).subscribe(
       respuesta => {  
        alert("Registro exitoso!");
-        console.log("Persona registrada:", respuesta);//por las dudas 
+        console.log("Persona registrada:", respuesta);//mustre enf12 por las dudas 
         this.router.navigateByUrl('/login');
       }
     );
