@@ -27,6 +27,8 @@ import { RegistroComponent } from './registro/registro.component';
 import { PrestamosLibrosComponent } from './prestamos-libros/prestamos-libros.component';
 import { PersonasEditarComponent } from './personas-editar/personas-editar.component';
 import { PersonasPerfilComponent } from './personas-perfil/personas-perfil.component';
+import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
+import { PrivateLayoutComponent } from './layouts/private-layout/private-layout.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { PersonasPerfilComponent } from './personas-perfil/personas-perfil.compo
     RegistroComponent,
     PrestamosLibrosComponent,
     PersonasEditarComponent,
-    PersonasPerfilComponent
+    PersonasPerfilComponent,
+    PublicLayoutComponent,
+    PrivateLayoutComponent
   ],
   imports: [
     BrowserModule,

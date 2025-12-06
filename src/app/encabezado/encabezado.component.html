@@ -1,17 +1,26 @@
-<header class="app-header" *ngIf="mostrarEncabezado">
-  <div class="logo">
-    <a href="#" class="logo">
-      <img src="assets/img/logo.png.png" alt="Logo">
-    </a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3 shadow-sm">
+  <a class="navbar-brand d-flex align-items-center" href="#">
+    <i class="bi bi-book-half me-2"></i>
+    Biblioteca Virtual
+  </a>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav align-items-center">
+
+      <li class="nav-item me-3 text-white fw-semibold">
+        👤 {{ usuario?.perNombre }} {{ usuario?.perApellido }}
+      </li>
+
+      <li class="nav-item">
+        <button class="btn btn-light btn-sm" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i> Salir
+        </button>
+      </li>
+
+    </ul>
   </div>
-
-  <div class="app-title" (click)="irAlInicio()" style="cursor: pointer;">
-  <span class="biblioteca-link">Biblioteca</span>
-</div>
-
-
-  <nav class="navbar navbar-light bg-light justify-content-between px-4 shadow-sm">
-    <h4 class="text-primary mb-0">Bienvenido, {{ usuario?.perNombre }} {{usuario?.perApellido}}</h4>
-    <button class="btn btn-outline-danger btn-sm" (click)="logout()">Cerrar sesión</button>
-  </nav>
-</header>
+</nav>

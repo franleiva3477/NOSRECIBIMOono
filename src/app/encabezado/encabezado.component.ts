@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-encabezado',
@@ -8,47 +7,20 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./encabezado.component.css']
 })
 export class EncabezadoComponent implements OnInit {
+
   usuario: any = null;
-  mostrarEncabezado = true;
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        // Muestro u ocultar el header
-        this.mostrarEncabezado = !['/login', '/registro'].includes(event.url);
-
-        // antualio los datos del usuario si existen y lo muestra en el encabezado
-      const token = localStorage.getItem('token');
-        const datos = localStorage.getItem('usuario');
-
-        if (!token || !datos) {
-          this.usuario = null;
-        } else {
-          this.usuario = JSON.parse(datos);
-        }
-      });
+  ngOnInit() {
+    const data = localStorage.getItem('usuario');
+    if (data) {
+      this.usuario = JSON.parse(data);
+    }
   }
-// hago que recargue el encabezado y vuelva al login
-  logout(): void {
-     this.router.navigate(['/login']);
+
+  logout() {
     localStorage.clear();
-    this.usuario = null;
-   
-  }
-  // y aca que cada vez qye toque otro lugar vuelva al inicio segun rl rol
-  irAlInicio() {
-  const rol = localStorage.getItem('rol');
-  if (rol === 'bibliotecario') {
-    this.router.navigate(['/dash-prof']);
-  } else if (rol === 'estudiante') {
-    this.router.navigate(['/dash-estudiantes']);
-  } else {
     this.router.navigate(['/login']);
   }
-}
-
 }
