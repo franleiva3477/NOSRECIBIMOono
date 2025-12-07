@@ -1,2 +1,40 @@
-<h1>no hay libros pancho
-</h1>
+<div class="container mt-4 libros-listar-container">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Lista de prestamos</h2>
+    
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Fecha de devolucion</th>
+          <th>Fecha de salida</th>
+          <th>Observacion</th>
+          <th>Usuario</th>
+          <th>Libro</th>
+         
+          <th >Acciones</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prestamo of prestamos; let idControl = index">
+          <td>{{ prestamo.presFechaDev }}</td>
+          <td>{{ prestamo.presFechaSal }}</td>
+          <td>{{ prestamo.presObservacion  }}</td>
+          <td>{{ prestamo.personaID }}</td>
+          <td>{{ prestamo.libroID }}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="CancelarPrestamo(prestamo.idPrestamo, idControl)">Cancelar Prestamo</button>
+          </td>
+
+          
+         
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

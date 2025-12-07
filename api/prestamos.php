@@ -5,6 +5,7 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 header("Content-Type: application/json");
 
 include "conexion.php";
+$pdo = new Conexion();
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -33,11 +34,7 @@ switch ($method) {
 
         // Obtener todos los préstamos
         $sql = $pdo->query("
-            SELECT p.*, l.libTitulo, per.perNombre, per.perApellido
-            FROM prestamos p
-            INNER JOIN libros l ON p.libroID = l.idLibro
-            INNER JOIN personas per ON p.personaID = per.idPersona
-        ");
+            SELECT * from prestamos");
 
         echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
         exit;
@@ -61,9 +58,8 @@ switch ($method) {
         $sql->bindValue(':personaID', $data['personaID']);
         $sql->bindValue(':libroID', $data['libroID']);
         $sql->bindValue(':presFechaSal', $data['presFechaSal']);
-        $sql->bindValue(':presFechaDev', $data['presFechaDev'] ?? '');
-        $sql->bindValue(':presObservacion', $data['presObservacion'] ?? '');
-
+        $sql->bindValue(':presFechaDev', empty($data['presFechaDev']) ? NULL : $data['presFechaDev']);
+        $sql->bindValue(':presObservacion', empty($data['presObservacion']) ? NULL : $data['presObservacion']);
         if ($sql->execute()) {
             $data['idPrestamo'] = $pdo->lastInsertId();
             echo json_encode($data);
@@ -93,8 +89,8 @@ switch ($method) {
         ");
 
         $sql->bindValue(':idPrestamo', $idPrestamo);
-        $sql->bindValue(':presFechaDev', $data['presFechaDev'] ?? '');
-        $sql->bindValue(':presObservacion', $data['presObservacion'] ?? '');
+        $sql->bindValue(':presFechaDev', empty($data['presFechaDev']) ? NULL : $data['presFechaDev']);
+$sql->bindValue(':presObservacion', empty($data['presObservacion']) ? NULL : $data['presObservacion'] ?? '');
 
         if ($sql->execute()) {
             echo json_encode(['mensaje' => 'Préstamo actualizado']);

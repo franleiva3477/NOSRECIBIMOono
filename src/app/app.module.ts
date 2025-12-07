@@ -62,7 +62,7 @@ import { PrivateLayoutComponent } from './layouts/private-layout/private-layout.
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    RouterModule 
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

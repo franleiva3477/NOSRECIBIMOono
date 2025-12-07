@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2025 a las 16:20:14
+-- Tiempo de generación: 07-12-2025 a las 16:21:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -62,9 +62,9 @@ CREATE TABLE `editoriales` (
 --
 
 INSERT INTO `editoriales` (`idEditorial`, `ediNombre`, `ediDireccion`, `ediTelefono`, `ediEmail`) VALUES
-(1, 'editorial animal', 'feliz123', '3435418540', 'editorial1@gmail.com'),
+(1, 'editorial animal', 'mitre1013', '3343-544342', 'editorial1@gmail.com'),
 (2, 'peso pluma', 'calle123', '3435418543', 'editorial2@gmail.com'),
-(5, 'editorial cumpal', 'hospitalllllll', '34352221221211', 'hospial@gmail.com');
+(5, 'editorial cumpal', 'hospitalllllll', '3435223435', 'hospial@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -87,10 +87,10 @@ CREATE TABLE `libros` (
 --
 
 INSERT INTO `libros` (`idLibro`, `libTitulo`, `libAnio`, `libNotaDeContenido`, `editorialID`, `materiaID`, `autorID`) VALUES
-(2, 'el principitonsjfnsfnsfa', '1920', 'sombrero elefante', 2, 1, 1),
-(3, '099999 años de soledad', '1167', 'Novela de realismo mágico', 1, 2, 1),
-(4, '09 años de soledad', '1967', 'Novela de realismo mágico', 1, 1, 1),
-(9, 'eweweq', '1212', 'no contiene  muchho', 1, 0, 1);
+(3, '100 años de soledad', '1167', 'Novela de realismo mágico', 1, 1, 1),
+(4, '09 años de soledad', '1967', 'Novela de realismo mágico', 5, 1, 1),
+(9, 'elchavo', '1212', 'no contiene  muchhovamoboke', 2, 2, 1),
+(10, 'el principito', '1212', 'literatura de francia', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -131,10 +131,11 @@ CREATE TABLE `personas` (
 --
 
 INSERT INTO `personas` (`idPersona`, `perNombre`, `perApellido`, `perDni`, `perContrasena`, `rolID`) VALUES
-(1, 'franco', 'colapinto', '41999999', 'hsanblas', 1),
-(2, 'franco', 'manstantuono', '41999999', 'hsanblas', 2),
-(3, 'juan', 'riquelme', '41999999', 'hsanblas', 1),
-(4, 'elpibe', 'janson', '41999999', 'hsanblas', 1);
+(1, 'borja', 'de titularfjffjfh', '123123111', 'hsanblas', 1),
+(2, 'franco', 'manstantuono', '123123222', 'hsanblas', 2),
+(4, 'elpibe', 'janson', '123123444', 'hsanblas', 1),
+(5, 'profesor', 'x', '123123555', 'hsanblas', 2),
+(11, 'francisco', 'leiva', '41980718', 'hsanblas', 1);
 
 -- --------------------------------------------------------
 
@@ -144,12 +145,21 @@ INSERT INTO `personas` (`idPersona`, `perNombre`, `perApellido`, `perDni`, `perC
 
 CREATE TABLE `prestamos` (
   `idPrestamo` int(11) NOT NULL,
-  `presFechaDev` varchar(20) DEFAULT NULL,
-  `presFechaSal` varchar(20) DEFAULT NULL,
+  `presFechaDev` date DEFAULT NULL,
+  `presFechaSal` date DEFAULT NULL,
   `presObservacion` varchar(100) DEFAULT NULL,
-  `prestamoID` int(11) DEFAULT NULL,
+  `personaID` int(11) DEFAULT NULL,
   `libroID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `prestamos`
+--
+
+INSERT INTO `prestamos` (`idPrestamo`, `presFechaDev`, `presFechaSal`, `presObservacion`, `personaID`, `libroID`) VALUES
+(1, '2025-11-20', '2025-11-10', 'Buen estado al devolver.', 1, 2),
+(2, '2025-12-12', '2025-12-05', 'Préstamo vigente.', 1, 2),
+(4, '2025-12-12', '2025-12-01', 'Libro con el lomo levemente dañado.', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -236,7 +246,7 @@ ALTER TABLE `editoriales`
 -- AUTO_INCREMENT de la tabla `libros`
 --
 ALTER TABLE `libros`
-  MODIFY `idLibro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idLibro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `materias`
@@ -248,13 +258,13 @@ ALTER TABLE `materias`
 -- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
-  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `prestamos`
 --
 ALTER TABLE `prestamos`
-  MODIFY `idPrestamo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPrestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`

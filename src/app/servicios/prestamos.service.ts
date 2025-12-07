@@ -33,7 +33,7 @@ export class PrestamosService {
   }
 
 
-  eliminarPrestamo(idPrestamo: number): Observable<any> {
+  CancelarPrestamo(idPrestamo: number): Observable<any> {
     return this.clienteHttp.delete(`${this.API}?idPrestamo=${idPrestamo}`);
   }
 
