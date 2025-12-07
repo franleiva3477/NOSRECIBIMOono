@@ -11,6 +11,8 @@ import { PrestamosService } from 'src/app/servicios/prestamos.service';
 })
 export class PrestamosLibrosComponent {
   prestamos:any[]=[];
+  personas:any[]=[];
+  libros:any[]=[];
 
   constructor(
       private routeador: Router,

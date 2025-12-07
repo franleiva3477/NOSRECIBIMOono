@@ -13,27 +13,24 @@
           <th>Fecha de salida</th>
           <th>Observacion</th>
           <th>Usuario</th>
-          <th>Libro</th>
-         
+          <th>Libro</th>   
           <th >Acciones</th>
          
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let prestamo of prestamos; let idControl = index">
-          <td>{{ prestamo.presFechaDev }}</td>
-          <td>{{ prestamo.presFechaSal }}</td>
-          <td>{{ prestamo.presObservacion  }}</td>
-          <td>{{ prestamo.personaID }}</td>
-          <td>{{ prestamo.libroID }}</td>
-          <td>
-            <button class="btn btn-danger btn-sm" (click)="CancelarPrestamo(prestamo.idPrestamo, idControl)">Cancelar Prestamo</button>
-          </td>
+     <tbody>
+  <tr *ngFor="let prestamo of prestamos; let idControl = index">
+    <td>{{ prestamo.presFechaDev }}</td>
+    <td>{{ prestamo.presFechaSal }}</td>
+    <td>{{ prestamo.presObservacion }}</td>
+    <td>{{ prestamo.perNombre }} {{ prestamo.perApellido }}</td>
+    <td>{{ prestamo.libTitulo }}</td>
+    <td>
+      <button class="btn btn-danger btn-sm" (click)="CancelarPrestamo(prestamo.idPrestamo, idControl)">Cancelar Prestamo </button>
+    </td>
+  </tr>
+</tbody>
 
-          
-         
-        </tr>
-      </tbody>
     </table>
   </div>
 

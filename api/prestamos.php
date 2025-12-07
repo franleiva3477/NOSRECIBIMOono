@@ -11,34 +11,55 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
 
-    //get
+    //
     case 'GET':
 
-        // Obtener préstamos por persona
-        if (isset($_GET['personaID'])) {
-            $personaID = $_GET['personaID'];
+    // Obtener préstamos por persona
+    if (isset($_GET['personaID'])) {
 
-            $sql = $pdo->prepare("
-                SELECT p.*, l.libTitulo 
-                FROM prestamos p
-                INNER JOIN libros l ON p.libroID = l.idLibro
-                WHERE personaID = :personaID
-            ");
+        $personaID = $_GET['personaID'];
 
-            $sql->bindValue(':personaID', $personaID);
-            $sql->execute();
+        $sql = $pdo->prepare("
+            SELECT 
+                p.idPrestamo,
+                p.presFechaSal,
+                p.presFechaDev,
+                p.presObservacion,
+                per.perNombre,
+                per.perApellido,
+                l.libTitulo
+            FROM prestamos p
+            INNER JOIN personas per ON p.personaID = per.idPersona
+            INNER JOIN libros l ON p.libroID = l.idLibro
+            WHERE p.personaID = :personaID
+        ");
 
-            echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
-            exit;
-        }
-
-        // Obtener todos los préstamos
-        $sql = $pdo->query("
-            SELECT * from prestamos");
+        $sql->bindValue(':personaID', $personaID);
+        $sql->execute();
 
         echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
         exit;
+    }
 
+    // Obtener todos los préstamos
+    $sql = $pdo->query("
+        SELECT 
+            p.idPrestamo,
+            p.presFechaSal,
+            p.presFechaDev,
+            p.presObservacion,
+            per.perNombre,
+            per.perApellido,
+            l.libTitulo
+        FROM prestamos p
+        LEFT JOIN personas per ON p.personaID = per.idPersona
+        LEFT JOIN libros l ON p.libroID = l.idLibro
+    ");
+
+    echo json_encode($sql->fetchAll(PDO::FETCH_ASSOC));
+    exit;
+
+    
     // post
     case 'POST':
 
