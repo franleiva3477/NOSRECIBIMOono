@@ -30,6 +30,7 @@ export class LibrosListarComponent {
       this.servicioLibros.obtenerlibros().subscribe((respuesta) => {
         console.log(respuesta);
         this.libros = respuesta;
+        
       
       });
     }

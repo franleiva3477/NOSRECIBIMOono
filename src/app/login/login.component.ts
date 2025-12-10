@@ -18,11 +18,11 @@
 
     login() {
       const datos = {
-        Dni: this.Dni,
-        contrasena: this.contrasena
+        perDni: this.Dni,
+        perContrasena: this.contrasena
       };
 
-      this.http.post<any>('http://localhost/NOSRECIBIMOono/api/login.php', datos).subscribe({
+      this.http.post<any>('http://localhost/NOSRECIBIMOono/apiconjwt/login.php', datos).subscribe({
         next: (resp) => {
 
           if (!resp.success) {
@@ -31,6 +31,12 @@
           }
 
           localStorage.setItem('token', resp.token);
+          
+          if(resp.rol == 2){
+            resp.rol='bibliotecario';
+          }else if(resp.rol==1){
+            resp.rol= 'estudiante';
+          }
           localStorage.setItem('rol', resp.rol);
           localStorage.setItem('usuario', JSON.stringify(resp.usuario));
 

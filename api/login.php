@@ -95,10 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     echo json_encode([
         "success" => true,
-        "token" => $jwt,
-        "rol" => $rol,
-        "usuario" => $usuario
-    ]);
+        "message" => "Login exitoso",
+        "token" => $token     ,
+            "id" => $usuario['idPersona'],
+            "rol" => $usuario['rolID'],
+            "usuario" => $usuarioy ]);
 
     exit;
 }

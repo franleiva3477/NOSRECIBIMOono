@@ -30,7 +30,7 @@ export class LibrosCargarComponent implements OnInit {
     this.formularioDeLibros = this.fb.group({
       libTitulo: ['', [Validators.required, Validators.minLength(4)]],
       libAnio: ['', [Validators.required, Validators.minLength(4), Validators.pattern('^[0-9]+$')]],
-      EditorialID: ['', Validators.required],
+      editorialID: ['', Validators.required],
       autorID: ['', Validators.required],
       materiaID: ['', Validators.required],
       libNotaDeContenido: ['', Validators.required]
@@ -58,6 +58,8 @@ export class LibrosCargarComponent implements OnInit {
   }
 
   cargarLibros() {
+    console.log(this.formularioDeLibros.value);
+    
     if (this.formularioDeLibros.valid) {
       this.servicioLibros.agregarLibros(this.formularioDeLibros.value).subscribe(() => {
         this.router.navigateByUrl('/libros-listar');
